@@ -1,0 +1,15 @@
+.DS_Store
+.vscode
+.cache
+.vscode
+*.log
+report
+build
+dist
+__sapper__
+es
+debug
+coverage
+now-secrets.json
+release
+node_modules

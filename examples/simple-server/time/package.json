@@ -1,0 +1,12 @@
+{
+  "name": "simple-server",
+  "version": "1.0.0",
+  "private": true,
+  "description": "A simple vistok server",
+  "main": "index.js",
+  "scripts": {
+    "dev": "node index.js"
+  },
+  "author": "@vorillaz",
+  "license": "MIT"
+}

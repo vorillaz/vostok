@@ -1,0 +1,91 @@
+#! /usr/bin/env node
+const {
+  getArgs,
+  getConfig,
+  loadEnv,
+  isPortTaken,
+  chalkSuccess,
+  logErr,
+  chalkInfo,
+  getNextPort,
+  getPort,
+  logInfo
+} = require('../src/utils');
+const {write: copy} = require('clipboardy');
+
+const boxen = require('boxen');
+
+const fastify = require('fastify');
+const createChildServer = require('../src/server');
+const timeout = 100;
+
+const mapPort = async p => {
+  const nextPort = await getNextPort(p);
+  logInfo(`Port ${p} was taken. Using ${nextPort} instead`);
+  return nextPort;
+};
+
+(async () => {
+  const args = getArgs();
+  const {logger, port} = args;
+  const config = getConfig();
+  const {builds = []} = config;
+
+  const isTaken = await isPortTaken(port);
+  const env = loadEnv(process.cwd(), true);
+  const NODE_ENV = 'development';
+
+  let rootPort = isTaken ? await mapPort(port) : port;
+
+  // Set up a new server
+  const server = fastify({
+    logger
+  });
+
+  const address = `http://localhost:${rootPort}`;
+  let msg = chalkSuccess('Vostok launched. \n');
+  msg += `\nBooting and running at: ${chalkSuccess(address)}`;
+
+  try {
+    await copy(address);
+    msg += `\n\n${chalkInfo('Copied local address to clipboard!')}`;
+  } catch (err) {
+    logErr(`Cannot copy to clipboard: ${err.message}`);
+  }
+
+  // Map each entry with a proxy server
+  const spawnOpts = {
+    env: {
+      ...process.env,
+      ...env,
+      NODE_ENV
+    }
+  };
+
+  await Promise.all(
+    builds.map(build => {
+      return createChildServer({server, build, rootPort, spawnOpts});
+    })
+  );
+
+  console.log(
+    boxen(msg, {
+      padding: 1,
+      borderColor: 'green',
+      margin: 1
+    })
+  );
+
+  await server.listen(rootPort);
+
+  const shutdown = signal => {
+    setTimeout(() => {
+      server.close();
+      logInfo(`\n\nClosing Vostok...\n\n`);
+      process.exit(1);
+    }, timeout).unref();
+  };
+
+  process.once('SIGINT', shutdown);
+  process.once('SIGTERM', shutdown);
+})();
