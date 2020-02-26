@@ -26,6 +26,7 @@ const createServer = async ({server, build, spawnOpts = {}}) => {
   if (use === static) {
     server.register(staticFastify, {
       root: path.join(process.cwd(), pkg, src),
+      decorateReply: false,
       prefix: dest,
       setHeaders: function(res, pathName) {
         Object.keys(headers).forEach(h => {

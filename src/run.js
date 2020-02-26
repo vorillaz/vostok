@@ -35,7 +35,7 @@ const run = async ({pkg, command, opts}) => {
     logErr(`${command} script is not registered within ${pkg}/package.json`);
     process.exit(0);
   }
-  const isYarnAvailable = hasYarn();
+  const isYarnAvailable = hasYarn(pkg);
 
   if (isYarnAvailable) {
     spawn('yarn', ['--ignore-engines', '--cwd', pkgPath, 'run', command], opts);
