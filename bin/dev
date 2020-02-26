@@ -8,9 +8,10 @@ const {
   logErr,
   chalkInfo,
   getNextPort,
-  getPort,
+  filterBuilds,
   logInfo
 } = require('../src/utils');
+const {allApps} = require('../src/constants');
 const {write: copy} = require('clipboardy');
 
 const boxen = require('boxen');
@@ -27,9 +28,27 @@ const mapPort = async p => {
 
 (async () => {
   const args = getArgs();
-  const {logger, port} = args;
+  const {logger, port, apps} = args;
   const config = getConfig();
-  const {builds = []} = config;
+  const {builds: rawBuilds = []} = config;
+
+  if (rawBuilds.length === 0) {
+    logErr(`\nYikes! There are no builds specified inside your \`vostok.json\``);
+    process.exit(0);
+  }
+
+  const builds = filterBuilds(rawBuilds, apps);
+
+  if (builds.length === 0 && apps !== allApps)  {
+    logErr(`\nYikes! Passed apps have no corresponding builds.`);
+    process.exit(0);
+  }
+
+  if (builds.length > 0 && apps !== allApps)  {
+    logInfo(`
+      \nStarting Vostok with : ${apps.split(',').map(subapp => subapp.trim()).join(', ')}
+    `);
+  }
 
   const isTaken = await isPortTaken(port);
   const env = loadEnv(process.cwd(), true);

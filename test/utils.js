@@ -14,31 +14,52 @@ const {
   chalkSuccess,
   chalkInfo,
   loadEnv,
+  filterBuilds,
   isPortTaken
 } = require('../src/utils');
 
-test('getConfig', t => {
+test.serial('filterBuilds', t => {
+  const fooBuild = [{pkg: 'foo'}];
+  const barBuild = [{pkg: 'bar'}];
+  const fooBarBuild = [...fooBuild, ...barBuild];
+
+  t.deepEqual(filterBuilds([]), []);
+  t.deepEqual(filterBuilds([{}]), [{}]);
+  t.deepEqual(filterBuilds(fooBuild), fooBuild);
+  t.deepEqual(filterBuilds(fooBarBuild), fooBarBuild);
+
+  t.deepEqual(filterBuilds(fooBarBuild, 'foo'), fooBuild);
+  t.deepEqual(filterBuilds(fooBarBuild, 'bar'), barBuild);
+
+  t.deepEqual(filterBuilds(fooBarBuild, 'foo, bar'), fooBarBuild);
+  t.deepEqual(filterBuilds(fooBarBuild, 'foo,bar'), fooBarBuild);
+});
+
+test.serial('getConfig', t => {
   t.snapshot(getConfig());
 });
 
-test('loadEnv on production', async t => {
+test.serial('loadEnv on production', async t => {
   const production = await loadEnv(__dirname, false);
 
   t.snapshot(production);
 });
 
-test('loadEnv on dev mode', async t => {
+test.serial('loadEnv on dev mode', async t => {
   const dev = await loadEnv(__dirname, true);
   t.snapshot(dev);
 });
 
-test('getPort allows to map a new port with a meaningful gap', async t => {
-  const p1 = await getPort();
-  const p2 = await getPort();
-  t.is(p2 - p1, 211);
-});
+test.serial(
+  'getPort allows to map a new port with a meaningful gap',
+  async t => {
+    const p1 = await getPort();
+    const p2 = await getPort();
+    t.is(p2 - p1, 11);
+  }
+);
 
-test('getNextPort grabs the next available port', async t => {
+test.serial('getNextPort grabs the next available port', async t => {
   const server = http.createServer(() => {});
   server.listen(4000);
   await once(server, 'listening').then(() => {});
@@ -48,7 +69,7 @@ test('getNextPort grabs the next available port', async t => {
   server.close();
 });
 
-test('isPortTaken detects TCP ports already in use', async t => {
+test.serial('isPortTaken detects TCP ports already in use', async t => {
   const server = http.createServer(() => {});
   const port = 1312;
   let p = await isPortTaken(port);
@@ -62,24 +83,24 @@ test('isPortTaken detects TCP ports already in use', async t => {
   server.close();
 });
 
-test('chalkErr', t => {
+test.serial('chalkErr', t => {
   t.is(chalkErr('foo'), 'foo');
 });
 
-test('chalkSuccess', t => {
+test.serial('chalkSuccess', t => {
   t.is(chalkSuccess('foo'), 'foo');
 });
 
-test('chalkInfo', t => {
+test.serial('chalkInfo', t => {
   t.is(chalkInfo('foo'), 'foo');
 });
 
-test('getArgs maps the default arguments', async t => {
+test.serial('getArgs maps the default arguments', async t => {
   const args = await getArgs();
   t.snapshot(args);
 });
 
-test('getArgs with passed arguments', async t => {
+test.serial('getArgs with passed arguments', async t => {
   const args = await getArgs({l: true, port: 8000});
   t.snapshot(args);
 });

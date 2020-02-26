@@ -7,7 +7,9 @@ const chalk = require('chalk');
 const dotenv = require('dotenv');
 const minimist = require('minimist');
 const {readFileSync, existsSync} = require('fs-extra');
-const {args, portGap, registry} = require('./constants');
+const {args, portGap, registry, allApps} = require('./constants');
+
+const isTest = process.env.NODE_ENV === 'test';
 
 const getJson = url =>
   new Promise((resolve, reject) => {
@@ -49,13 +51,32 @@ const logRedAlert = msg => console.log(chalkRedBg(msg));
 let portsRange = portGap;
 
 const getConfig = () => {
+  if (isTest) {
+    return {};
+  }
   try {
     const json = require(path.join(process.cwd(), 'vostok.json'));
     return json;
   } catch (error) {
-    logErr('\nYikes, you need a vostok.json in place!\n');
+    logErr('\nYikes! you need a vostok.json in place!\n');
     process.exit(0);
   }
+};
+
+const filterBuilds = (builds, apps = allApps) => {
+  if (apps === allApps) {
+    return builds;
+  }
+
+  const passedApps = apps.split(',').map(app => app.trim());
+  return builds.filter(
+    ({name = '__/GIBBERISH/__', pkg = '__/GIBBERISH/__'}) => {
+      return (
+        passedApps.indexOf(name.trim()) > -1 ||
+        passedApps.indexOf(pkg.trim()) > -1
+      );
+    }
+  );
 };
 
 const spawn = (command = '', args = [], opts = {}) => {
@@ -183,6 +204,8 @@ module.exports = {
   spawn,
   getConfig,
   getArgs,
+  isTest,
+  filterBuilds,
   logErr,
   log,
   getPort,

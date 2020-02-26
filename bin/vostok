@@ -51,7 +51,7 @@ const bin = path.resolve(path.join(__dirname, cmd));
 const startProcess = async () => {
   try {
     const v = await shouldUpdate(version);
-    logRedAlert(`There is a new version of Vostok available. v${v}`)
+    logRedAlert(`There is a new version of Vostok available: v${v}`)
   } catch (error) {
 
   }
