@@ -13,3 +13,4 @@ coverage
 now-secrets.json
 release
 node_modules
+.rts*

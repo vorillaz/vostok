@@ -1,0 +1,18 @@
+{
+  "version": 2,
+  "comment": "Basic server config",
+  "builds": [
+    {
+      "pkg": "app",
+      "use": "@vostok/static",
+      "dest": "/app",
+      "src": "/dist"
+    },
+    {
+      "pkg": "lib",
+      "use": "@vostok/static",
+      "dest": "/lib",
+      "src": "/dist"
+    }
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "name": "microbundle-example",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Develop and build multiple microbundles",
+  "scripts": {
+    "dev": "vostok"
+  },
+  "author": "@vorillaz",
+  "license": "MIT",
+  "devDependencies": {
+    "vostok": "latest"
+  }
+}
