@@ -179,8 +179,8 @@ const shouldUpdate = currentVersion => {
   }
   return new Promise((resolve, reject) => {
     hasBeenChecked = true;
-    getJson(registry.url),
-      then((data = {}) => {
+    getJson(registry.url)
+      .then((data = {}) => {
         const {collected = {}} = data;
         const {metadata = {}} = collected;
         const {version = false} = metadata;
@@ -195,7 +195,10 @@ const shouldUpdate = currentVersion => {
         }
 
         resolve(version);
-      }).catch(reject);
+      })
+      .catch(e => {
+        reject();
+      });
   });
 };
 
