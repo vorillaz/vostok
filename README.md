@@ -34,6 +34,6 @@ TBD.
 
 ## Next up.
 
-- [] Add build.
-- [] Add sourcemaps for `@vostok/node`.
-- [] Better error handling, bundling and spin up for child process.
+- Finalize `vostok build`.
+- Add sourcemaps for `@vostok/node`.
+- Better error handling, bundling and spin up for child processes.
