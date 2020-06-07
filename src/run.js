@@ -8,6 +8,7 @@ const hasYarn = pkg =>
 
 const isDir = dirPath =>
   existsSync(dirPath) && lstatSync(dirPath).isDirectory();
+
 const isFile = filePath => existsSync(filePath) && lstatSync(filePath).isFile();
 
 const run = async ({pkg, command, opts}) => {
@@ -19,10 +20,12 @@ const run = async ({pkg, command, opts}) => {
   }
 
   const pkgPackagePath = join(pkgPath, 'package.json');
+
   if (!isFile(pkgPackagePath)) {
     logErr(`${pkg}/package.json does not exist!`);
     process.exit(0);
   }
+
   const pkgJson = require(pkgPackagePath);
 
   const {scripts = null} = pkgJson;

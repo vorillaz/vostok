@@ -29,11 +29,11 @@ const mapPort = async p => {
 (async () => {
   const args = getArgs();
   const {logger, port, apps} = args;
-  const config = getConfig();
+  const config = await getConfig();
   const {builds: rawBuilds = []} = config;
 
   if (rawBuilds.length === 0) {
-    logErr(`\nYikes! There are no builds specified inside your \`vostok.json\``);
+    logErr(`\nYikes! There are no builds specified inside your \`vostok.json\` or \`vostok.config.js\``);
     process.exit(0);
   }
 

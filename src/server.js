@@ -11,7 +11,14 @@ const createServer = async ({server, build, spawnOpts = {}}) => {
   const port = await getPort();
   const command = 'dev';
 
-  const {use = node, pkg = null, src = '/', dest = '/', headers = {}} = build;
+  const {
+    use = node,
+    pkg = null,
+    src = '/',
+    dest = '/',
+    headers = {},
+    env: buildEnv = {}
+  } = build;
   if (pkg === null) {
     logErr(`There is a build with no \`pkg\` defined.`);
   }
@@ -20,7 +27,7 @@ const createServer = async ({server, build, spawnOpts = {}}) => {
   const passedOpts = {
     cwd: path.join(process.cwd(), pkg),
     ...spawnOpts,
-    env: {...env, PORT: port}
+    env: {...env, ...buildEnv, PORT: port}
   };
 
   if (use === static) {

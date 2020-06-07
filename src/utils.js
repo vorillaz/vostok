@@ -38,6 +38,8 @@ const getJson = url =>
       });
   });
 
+const isFn = fn => !!(fn && fn.constructor && fn.call && fn.apply);
+
 const chalkErr = chalk.bold.red;
 const chalkSuccess = chalk.bold.green;
 const chalkRedBg = chalk.bgRed;
@@ -50,17 +52,24 @@ const logRedAlert = msg => console.log(chalkRedBg(msg));
 
 let portsRange = portGap;
 
-const getConfig = () => {
+const getConfig = async () => {
   if (isTest) {
     return {};
   }
+
+  try {
+    const conf = require(path.join(process.cwd(), 'vostok.config.js'));
+    const confContents = isFn(conf) ? await conf() : conf;
+    return confContents;
+  } catch (ingore) {}
+
   try {
     const json = require(path.join(process.cwd(), 'vostok.json'));
     return json;
-  } catch (error) {
-    logErr('\nYikes! you need a vostok.json in place!\n');
-    process.exit(0);
-  }
+  } catch (ingore) {}
+
+  logErr('\nYikes! you need a vostok.json in place!\n');
+  process.exit(0);
 };
 
 const filterBuilds = (builds, apps = allApps) => {
@@ -121,10 +130,20 @@ const checkFile = file => existsSync(file);
 const loadEnv = (dest, dev = false) => {
   const rootEnv = path.join(dest, '.env');
   const localEnv = path.join(dest, '.env.local');
-  const env = checkFile(rootEnv) ? dotenv.parse(readFileSync(rootEnv)) : {};
 
-  const local =
-    checkFile(localEnv) && dev ? dotenv.parse(readFileSync(localEnv)) : {};
+  const hasEnv = checkFile(rootEnv);
+  const hasLocalEnv = checkFile(localEnv) && dev;
+
+  if (hasEnv) {
+    logInfo(`\n.env found and passed across all apps\n`);
+  }
+
+  if (hasLocalEnv) {
+    logInfo(`.env.local found and passed across all apps\n`);
+  }
+
+  const env = hasEnv ? dotenv.parse(readFileSync(rootEnv)) : {};
+  const local = hasLocalEnv ? dotenv.parse(readFileSync(localEnv)) : {};
 
   return {...env, ...local};
 };

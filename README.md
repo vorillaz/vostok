@@ -22,7 +22,7 @@ my_awesome_app/
 ├── api_2
 ├──── index.js # Entry point
 ├──── package.json # api_2 dependencies
-├── vostok.json # vostok configuration
+├── vostok.json or vostok.config.js # vostok configuration
 └── package.json # Main package.json
 ```
 
