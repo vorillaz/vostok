@@ -35,8 +35,9 @@ test.serial('filterBuilds', t => {
   t.deepEqual(filterBuilds(fooBarBuild, 'foo,bar'), fooBarBuild);
 });
 
-test.serial('getConfig', t => {
-  t.snapshot(getConfig());
+test.serial('getConfig', async t => {
+  const conf = await getConfig();
+  t.snapshot(conf);
 });
 
 test.serial('loadEnv on production', async t => {
