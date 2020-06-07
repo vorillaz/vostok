@@ -6,7 +6,6 @@
 report
 build
 dist
-__sapper__
 es
 debug
 coverage
@@ -14,4 +13,6 @@ now-secrets.json
 release
 node_modules
 .rts*
-__sapper_
+
+**/*/yarn.lock
+**/*/package-lock.json
