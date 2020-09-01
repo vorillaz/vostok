@@ -9,6 +9,12 @@
   "author": {
     "name": "@vorillaz"
   },
+  "contributors": [
+    {
+      "name": "vorillaz",
+      "email": "theodorevorillas@gmail.com"
+    }
+  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/vorillaz/vostok.git"
