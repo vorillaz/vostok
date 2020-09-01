@@ -1,0 +1,64 @@
+version: 2.1
+executors:
+  node:
+    docker:
+      - image: circleci/node:14.5
+
+commands:
+  getcommitmsg:
+    steps:
+      - run:
+          name: Get commit message
+          command: |
+            echo 'export GIT_COMMIT_DESC=$(git log -1 --pretty=format:"%s")' >> $BASH_ENV
+            source $BASH_ENV
+  setup:
+    steps:
+      - checkout
+      - run:
+          name: Install js dependencies
+          command: yarn install
+
+  setupci:
+    steps:
+      - checkout
+      - restore_cache:
+          name: Restore Yarn Package Cache
+          keys:
+            - yarn-packages-{{ checksum "yarn.lock" }}
+      - run:
+          name: Install Dependencies
+          command: yarn install --immutable
+      - save_cache:
+          name: Save Yarn Package Cache
+          key: yarn-packages-{{ checksum "yarn.lock" }}
+          paths:
+            - ~/.cache/yarn
+jobs:
+  tests:
+    executor: node
+    steps:
+      - setupci
+      - run:
+          name: Run tests
+          command: yarn test
+  release:
+    executor: node
+    steps:
+      - checkout
+      - getcommitmsg
+      - run:
+          name: Release
+          command: |
+            if [ "${GIT_COMMIT_DESC}" !~ /(release|no-release) ];
+              yarn release;
+            fi
+workflows:
+  version: 2
+  pipeline:
+    jobs:
+      - tests
+      - release:
+          filters:
+            branches:
+              only: circleci-project-setup

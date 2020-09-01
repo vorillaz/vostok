@@ -1,19 +1,26 @@
 {
   "name": "vostok",
+  "description": "A simple proxy gateway for microservices",
+  "homepage": "https://github.com/vorillaz/vostok#readme",
   "version": "1.3.0",
-  "repository": "vorillaz/vostok",
-  "author": "@vorillaz",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/vorillaz/vostok/issues"
-  },
   "bin": {
     "vostok": "./bin/vostok"
   },
-  "scripts": {
-    "test": "ava",
-    "test:watch": "ava --watch --verbose"
+  "author": {
+    "name": "@vorillaz"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vorillaz/vostok.git"
+  },
+  "bugs": {
+    "url": "https://github.com/vorillaz/vostok/issues"
+  },
+  "keywords": [
+    "cli",
+    "microservices",
+    "tools"
+  ],
   "dependencies": {
     "boxen": "4.2.0",
     "chalk": "3.0.0",
@@ -28,15 +35,51 @@
     "semver": "7.1.3"
   },
   "devDependencies": {
-    "@commitlint/cli": "8.3.5",
-    "@commitlint/config-conventional": "8.2.0",
+    "@commitlint/cli": "latest",
+    "@commitlint/config-conventional": "latest",
     "ava": "3.8.2",
-    "husky": "4.2.3",
-    "lint-staged": "10.0.7",
-    "prettier": "1.19.1"
+    "ci-publish": "latest",
+    "conventional-github-releaser": "latest",
+    "finepack": "latest",
+    "git-authors-cli": "latest",
+    "husky": "latest",
+    "lint-staged": "latest",
+    "npm-check-updates": "latest",
+    "prettier": "1.19.1",
+    "standard-version": "latest"
   },
-  "engines": {
-    "node": "10.x"
+  "files": [
+    "bin",
+    "src"
+  ],
+  "scripts": {
+    "contributors": "(git-authors-cli && finepack && git add package.json && git commit -m 'build: contributors' --no-verify) || true",
+    "finepack": "finepack",
+    "postrelease": "yarn release:tags && yarn release:github && ci-publish",
+    "prerelease": "yarn update:check && yarn contributors",
+    "release": "standard-version -a",
+    "release:github": "conventional-github-releaser -p angular",
+    "release:tags": "git push --follow-tags origin HEAD:master",
+    "test": "ava",
+    "test:watch": "ava --watch --verbose",
+    "update": "ncu -u",
+    "update:check": "ncu -- --error-level 2"
+  },
+  "license": "MIT",
+  "ava": {
+    "concurrency": 5,
+    "files": [
+      "test/**/*.js"
+    ],
+    "ignoredByWatcher": [
+      "test/fixtures"
+    ],
+    "verbose": true
+  },
+  "commitlint": {
+    "extends": [
+      "@commitlint/config-conventional"
+    ]
   },
   "husky": {
     "hooks": {
@@ -47,16 +90,9 @@
   "lint-staged": {
     "*.{js,md}": [
       "prettier --write"
-    ]
-  },
-  "ava": {
-    "files": [
-      "test/**/*.js"
     ],
-    "concurrency": 5,
-    "verbose": true,
-    "ignoredByWatcher": [
-      "test/fixtures"
+    "package.json": [
+      "finepack"
     ]
   }
 }

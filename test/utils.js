@@ -60,7 +60,7 @@ test.serial(
   }
 );
 
-test.serial('getNextPort grabs the next available port', async t => {
+test.skip('getNextPort grabs the next available port', async t => {
   const server = http.createServer(() => {});
   server.listen(4000);
   await once(server, 'listening').then(() => {});
@@ -70,7 +70,7 @@ test.serial('getNextPort grabs the next available port', async t => {
   server.close();
 });
 
-test.serial('isPortTaken detects TCP ports already in use', async t => {
+test.skip('isPortTaken detects TCP ports already in use', async t => {
   const server = http.createServer(() => {});
   const port = 1312;
   let p = await isPortTaken(port);
