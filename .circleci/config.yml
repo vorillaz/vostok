@@ -10,7 +10,7 @@ commands:
       - run:
           name: Get commit message
           command: |
-            echo 'export GIT_COMMIT_DESC=$(git log -1 --pretty=format:"%s")' >> $BASH_ENV
+            echo 'export GIT_COMMIT_MSG=$(git log -1 --pretty=format:"%s")' >> $BASH_ENV
             source $BASH_ENV
   setup:
     steps:
@@ -42,23 +42,35 @@ jobs:
       - run:
           name: Run tests
           command: yarn test
+
   release:
     executor: node
     steps:
       - checkout
       - getcommitmsg
+      - setup
+      - run:
+          name: Run tests
+          command: yarn test
       - run:
           name: Release
           command: |
-            if [ "${GIT_COMMIT_DESC}" !~ /(release|no-release) ];
+            RELEASE_REGEX="(release|no-release)";
+            if [[ $GIT_COMMIT_MSG !~ $RELEASE_REGEX ]]; then
               yarn release;
+            else
+                echo "Released: ";
+                echo $GIT_COMMIT_MSG;
             fi
 workflows:
   version: 2
   pipeline:
     jobs:
-      - tests
+      - tests:
+          filters:
+            branches:
+              ignore: master
       - release:
           filters:
             branches:
-              only: circleci-project-setup
+              only: master

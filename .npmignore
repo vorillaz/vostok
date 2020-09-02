@@ -20,3 +20,4 @@ release
 node_modules
 examples
 .rts*
+.circleci
