@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.3.3](https://github.com/vorillaz/vostok/compare/v1.3.2...v1.3.3) (2020-09-02)
+
+
+### Features
+
+* NPM publish workflow ([#8](https://github.com/vorillaz/vostok/issues/8)) ([39b1468](https://github.com/vorillaz/vostok/commit/39b14688de89b99493c5c88f07486b85d9559a5a))
+
 ### [1.3.2](https://github.com/vorillaz/vostok/compare/v1.3.1...v1.3.2) (2020-09-02)
 
 
