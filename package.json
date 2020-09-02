@@ -61,7 +61,7 @@
   "scripts": {
     "contributors": "(git-authors-cli && finepack && git add package.json && git commit -m 'build: contributors' --no-verify) || true",
     "finepack": "finepack",
-    "postrelease": "yarn release:tags && yarn release:github && ci-publish",
+    "postrelease": "yarn release:tags && yarn release:github && ci-publish --access=public",
     "prerelease": "yarn update:check && yarn contributors",
     "release": "standard-version -a",
     "release:github": "conventional-github-releaser -p angular",
