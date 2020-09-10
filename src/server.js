@@ -8,22 +8,26 @@ const run = require('./run');
 const {static, node} = builds;
 
 const createServer = async ({server, build, spawnOpts = {}}) => {
-  const port = await getPort();
-  const command = 'dev';
-
   const {
     use = node,
     pkg = null,
+    port: buildPort,
     src = '/',
     dest = '/',
     headers = {},
     env: buildEnv = {}
   } = build;
+
+  const port = buildPort ? buildPort : await getPort();
+
+  const command = 'dev';
+
   if (pkg === null) {
     logErr(`There is a build with no \`pkg\` defined.`);
   }
 
   const {env = {}} = spawnOpts;
+
   const passedOpts = {
     cwd: path.join(process.cwd(), pkg),
     ...spawnOpts,
@@ -35,7 +39,8 @@ const createServer = async ({server, build, spawnOpts = {}}) => {
       root: path.join(process.cwd(), pkg, src),
       decorateReply: false,
       prefix: dest,
-      setHeaders: function(res, pathName) {
+      rewritePrefix: dest,
+      setHeaders: (res, pathName) => {
         Object.keys(headers).forEach(h => {
           res.setHeader(h, headers[h]);
         });
@@ -47,6 +52,7 @@ const createServer = async ({server, build, spawnOpts = {}}) => {
     await server.register(proxy, {
       upstream: `http://localhost:${port}`,
       prefix: dest,
+      rewritePrefix: dest,
       replyOptions: {
         onResponse: (request, reply, res) => {
           Object.keys(headers).forEach(h => {

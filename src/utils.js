@@ -63,12 +63,7 @@ const getConfig = async () => {
     return confContents;
   } catch (ingore) {}
 
-  try {
-    const json = require(path.join(process.cwd(), 'vostok.json'));
-    return json;
-  } catch (ingore) {}
-
-  logErr('\nYikes! you need a vostok.json in place!\n');
+  logErr('\nYikes! you need a vostok.config.js in place!\n');
   process.exit(0);
 };
 
