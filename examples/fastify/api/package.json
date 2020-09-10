@@ -1,0 +1,16 @@
+{
+  "name": "simple-fastify-microservices-api",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": {
+    "name": "@vorillaz"
+  },
+  "dependencies": {
+    "fastify": "^2.14.1"
+  },
+  "scripts": {
+    "dev": "node index.js"
+  },
+  "private": true,
+  "license": "MIT"
+}

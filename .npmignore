@@ -3,6 +3,10 @@
 .vscode
 .cache
 .vscode
+.prettierrc
+.circleci
+.commitlintrc.js
+
 *.log
 report
 build
@@ -20,4 +24,4 @@ release
 node_modules
 examples
 .rts*
-.circleci
+.env
