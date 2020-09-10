@@ -1,5 +1,4 @@
 # Reference https://github.com/emotion-js/emotion/blob/master/.circleci/config.yml
-
 version: 2.1
 jobs:
   test:
@@ -55,7 +54,7 @@ jobs:
           name: Add changelog and stuff
           command: npx standard-version -a
       - run:
-          name: Add tags
+          name: Add git tags and releseases
           command: git push --follow-tags origin master
       - run:
           name: Publish to NPM through Yarn
