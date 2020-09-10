@@ -158,11 +158,7 @@ const isPortTaken = port => {
 
     tester.on('error', e => {
       tester.close();
-      if (e.errno === 'EADDRINUSE' || e.errno === 'ERR_SERVER_ALREADY_LISTEN') {
-        isTaken = true;
-      } else {
-        reject();
-      }
+      isTaken = true;
     });
 
     tester.listen(port);

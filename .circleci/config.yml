@@ -54,7 +54,7 @@ jobs:
           name: Add changelog and stuff
           command: npx standard-version -a
       - run:
-          name: Add git tags and releseases
+          name: Add git tags and releases
           command: git push --follow-tags origin master
       - run:
           name: Publish to NPM through Yarn

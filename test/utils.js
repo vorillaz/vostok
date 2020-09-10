@@ -60,17 +60,21 @@ test.serial(
   }
 );
 
-test.skip('getNextPort grabs the next available port', async t => {
+test('getNextPort grabs the next available port', async t => {
   const server = http.createServer(() => {});
+
+  let p = await getNextPort(4000);
+  t.is(p, 4000);
+
   server.listen(4000);
   await once(server, 'listening').then(() => {});
 
-  const p = await getNextPort(4000);
+  p = await getNextPort(4000);
   t.is(p, 4001);
   server.close();
 });
 
-test.skip('isPortTaken detects TCP ports already in use', async t => {
+test('isPortTaken detects TCP ports already in use', async t => {
   const server = http.createServer(() => {});
   const port = 1312;
   let p = await isPortTaken(port);
