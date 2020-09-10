@@ -22,7 +22,7 @@ my_awesome_app/
 ├── api_2
 ├──── index.js # Entry point
 ├──── package.json # api_2 dependencies
-├── vostok.json or vostok.config.js # vostok configuration
+├── vostok.config.js # vostok configuration
 └── package.json # Main package.json
 ```
 
@@ -30,10 +30,18 @@ Using Vostok you can fairly easily create a reverse proxy for your application, 
 
 ## CLI
 
-TBD.
+### `vostok dev`
+
+Runs Vostok in development mode, using the `vostok.config.js` you can configure the sub app entry points.
+The dev option allows you yo pass down some additional params:
+
+- `-p 4011` Choose the port for Vostok
+- `-a app,lib` Run Vostok with specific apps.
+- `l` See Vostok's logging info.
 
 ## Next up.
 
+- Add `vostok install` with workspaces support.
 - Finalize `vostok build`.
 - Add sourcemaps for `@vostok/node`.
 - Better error handling, bundling and spin up for child processes.
