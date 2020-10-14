@@ -8,7 +8,11 @@ module.exports = {
     },
     {
       pkg: 'date',
-      dest: '/date'
+      dest: '/date',
+      onResponse: (request, reply, res) => {
+        reply.header('coming-from', 'vostok');
+        reply.send(res);
+      }
     }
   ]
 };
