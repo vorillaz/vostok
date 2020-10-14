@@ -14,5 +14,7 @@ release
 node_modules
 .rts*
 
+.history
+.next
 **/*/yarn.lock
 **/*/package-lock.json
