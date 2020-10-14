@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.5.0](https://github.com/vorillaz/vostok/compare/v1.4.1...v1.5.0) (2020-10-14)
+
+
+### Features
+
+* set custom headers and response helper methods ([bc961d5](https://github.com/vorillaz/vostok/commit/bc961d5ac6b37884d9d54ba0556aaf1b52f8c848))
+
 ### [1.4.1](https://github.com/vorillaz/vostok/compare/v1.4.0...v1.4.1) (2020-09-10)
 
 ## 1.4.0 (2020-09-10)
