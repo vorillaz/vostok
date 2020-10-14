@@ -15,7 +15,8 @@ const createServer = async ({server, build, spawnOpts = {}}) => {
     src = '/',
     dest = '/',
     headers = {},
-    env: buildEnv = {}
+    env: buildEnv = {},
+    onResponse = (request, reply, res) => ({reply, res})
   } = build;
 
   const port = buildPort ? buildPort : await getPort();
@@ -54,10 +55,11 @@ const createServer = async ({server, build, spawnOpts = {}}) => {
       prefix: dest,
       rewritePrefix: dest,
       replyOptions: {
-        onResponse: (request, reply, res) => {
+        onResponse: async (request, reply, res) => {
           Object.keys(headers).forEach(h => {
             reply.header(h, headers[h]);
           });
+          await onResponse(request, reply, res);
           reply.send(res);
         }
       }
