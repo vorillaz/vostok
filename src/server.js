@@ -16,7 +16,9 @@ const createServer = async ({server, build, spawnOpts = {}}) => {
     dest = '/',
     headers = {},
     env: buildEnv = {},
-    onResponse = (request, reply, res) => ({reply, res})
+    onResponse = (request, reply, res) => {
+      reply.send(res);
+    }
   } = build;
 
   const port = buildPort ? buildPort : await getPort();
@@ -60,7 +62,6 @@ const createServer = async ({server, build, spawnOpts = {}}) => {
             reply.header(h, headers[h]);
           });
           await onResponse(request, reply, res);
-          reply.send(res);
         }
       }
     });

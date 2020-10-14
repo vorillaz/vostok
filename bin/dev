@@ -92,7 +92,6 @@ const mapPort = async p => {
       return createChildServer({server, build, rootPort, spawnOpts});
     })
   );
-
   console.log(
     boxen(msg, {
       padding: 1,
