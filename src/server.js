@@ -71,8 +71,8 @@ const createServer = async ({server, build, spawnOpts = {}}) => {
     cwd: path.join(process.cwd(), pkg),
     ...passedOpts
   };
-
-  return run({pkg, opts, command});
+  run({pkg, opts, command});
+  return {pkg, port};
 };
 
 module.exports = createServer;

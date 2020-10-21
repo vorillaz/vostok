@@ -45,6 +45,7 @@ const run = async ({pkg, command, opts}) => {
   } else {
     spawn('npm', ['run', command], opts);
   }
+  return {pkg, opts};
 };
 
 module.exports = run;

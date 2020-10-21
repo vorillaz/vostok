@@ -5,8 +5,9 @@ const {
   loadEnv,
   isPortTaken,
   chalkSuccess,
-  logErr,
   chalkInfo,
+  chalkInfoBold,
+  logErr,
   getNextPort,
   filterBuilds,
   logInfo
@@ -69,14 +70,7 @@ const mapPort = async p => {
 
   const address = `http://localhost:${rootPort}`;
   let msg = chalkSuccess('Vostok launched. \n');
-  msg += `\nBooting and running at: ${chalkSuccess(address)}`;
-
-  try {
-    await copy(address);
-    msg += `\n\n${chalkInfo('Copied local address to clipboard!')}`;
-  } catch (err) {
-    logErr(`Cannot copy to clipboard: ${err.message}`);
-  }
+  msg += `\nBooting and running at: ${chalkSuccess(address)}\n`;
 
   // Map each entry with a proxy server
   const spawnOpts = {
@@ -87,11 +81,22 @@ const mapPort = async p => {
     }
   };
 
-  await Promise.all(
+  const buildsInfo = await Promise.all(
     builds.map(build => {
       return createChildServer({server, build, rootPort, spawnOpts});
     })
   );
+
+  buildsInfo.forEach(buildInfo => {
+    msg += `\n${chalkInfoBold(`- /${buildInfo.pkg} -> ${buildInfo.port}`)}`;
+  });
+
+  try {
+    await copy(address);
+    msg += `\n\n${chalkInfo('Copied local address to clipboard!')}`;
+  } catch (err) {
+    logErr(`Cannot copy to clipboard: ${err.message}`);
+  }
   console.log(
     boxen(msg, {
       padding: 1,

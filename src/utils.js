@@ -44,6 +44,7 @@ const chalkErr = chalk.bold.red;
 const chalkSuccess = chalk.bold.green;
 const chalkRedBg = chalk.bgRed;
 const chalkInfo = chalk.keyword('orange');
+const chalkInfoBold = chalkInfo.bold;
 
 const logErr = e => console.error(chalkErr(e));
 const log = msg => console.log(chalkSuccess(msg));
@@ -222,10 +223,11 @@ module.exports = {
   logErr,
   log,
   getPort,
-  chalkErr,
   getNextPort,
+  chalkErr,
   chalkSuccess,
   chalkInfo,
+  chalkInfoBold,
   logInfo,
   loadEnv,
   isPortTaken,
