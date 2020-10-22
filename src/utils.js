@@ -1,7 +1,7 @@
 const crossSpawn = require('cross-spawn');
 const path = require('path');
 const http = require('http');
-const https = require('https');
+const fs = require('fs');
 const {gt} = require('semver');
 const chalk = require('chalk');
 const dotenv = require('dotenv');
@@ -59,13 +59,19 @@ const getConfig = async () => {
   }
 
   try {
-    const conf = require(path.join(process.cwd(), 'vostok.config.js'));
+    const confPath = path.join(process.cwd(), 'vostok.config.js');
+    if (!existsSync(confPath)) {
+      throw new Error(
+        chalkErr('\nYikes! you need a vostok.config.js in place!\n')
+      );
+    }
+    const conf = require(confPath);
     const confContents = isFn(conf) ? await conf() : conf;
     return confContents;
-  } catch (ingore) {}
-
-  logErr('\nYikes! you need a vostok.config.js in place!\n');
-  process.exit(0);
+  } catch (err) {
+    console.log(err);
+    process.exit(1);
+  }
 };
 
 const filterBuilds = (builds, apps = allApps) => {
