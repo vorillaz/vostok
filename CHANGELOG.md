@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.5.2](https://github.com/vorillaz/vostok/compare/v1.5.1...v1.5.2) (2020-10-22)
+
+
+### Bug Fixes
+
+* better error handling and messaging for config file ([2a8fec2](https://github.com/vorillaz/vostok/commit/2a8fec261e4da6f505b451533b0405e6f4f85501))
+
 ### [1.5.1](https://github.com/vorillaz/vostok/compare/v1.5.0...v1.5.1) (2020-10-21)
 
 ## [1.5.0](https://github.com/vorillaz/vostok/compare/v1.4.1...v1.5.0) (2020-10-14)
