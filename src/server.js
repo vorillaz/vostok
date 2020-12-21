@@ -18,7 +18,8 @@ const createServer = async ({server, build, spawnOpts = {}}) => {
     env: buildEnv = {},
     onResponse = (request, reply, res) => {
       reply.send(res);
-    }
+    },
+    rewriteRequestHeaders = (originalReq, headers) => headers
   } = build;
 
   const port = buildPort ? buildPort : await getPort();
@@ -37,17 +38,17 @@ const createServer = async ({server, build, spawnOpts = {}}) => {
     env: {...env, ...buildEnv, PORT: port}
   };
 
+  const opts = {
+    cwd: path.join(process.cwd(), pkg),
+    ...passedOpts
+  };
+
   if (use === static) {
-    server.register(staticFastify, {
-      root: path.join(process.cwd(), pkg, src),
-      decorateReply: false,
+    console.log('static');
+    await server.register(staticFastify, {
       prefix: dest,
-      rewritePrefix: dest,
-      setHeaders: (res, pathName) => {
-        Object.keys(headers).forEach(h => {
-          res.setHeader(h, headers[h]);
-        });
-      }
+      prefixAvoidTrailingSlash: true,
+      root: path.join(process.cwd(), pkg, src)
     });
   }
 
@@ -55,8 +56,8 @@ const createServer = async ({server, build, spawnOpts = {}}) => {
     await server.register(proxy, {
       upstream: `http://localhost:${port}`,
       prefix: dest,
-      rewritePrefix: dest,
       replyOptions: {
+        rewriteRequestHeaders,
         onResponse: async (request, reply, res) => {
           Object.keys(headers).forEach(h => {
             reply.header(h, headers[h]);
@@ -65,13 +66,9 @@ const createServer = async ({server, build, spawnOpts = {}}) => {
         }
       }
     });
+    run({pkg, opts, command});
   }
 
-  const opts = {
-    cwd: path.join(process.cwd(), pkg),
-    ...passedOpts
-  };
-  run({pkg, opts, command});
   return {pkg, port};
 };
 

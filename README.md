@@ -107,6 +107,25 @@ module.exports = {
 };
 ```
 
+### builds.rewriteRequestHeaders
+
+A custom hook that allows headers parsing and rewriting.
+
+```js
+module.exports = {
+  builds: [
+    {
+      pkg: 'api',
+      dest: '/api',
+      rewriteRequestHeaders: (request, headers) => ({
+        ...headers,
+        'request-id': uuid()
+      })
+    }
+  ]
+};
+```
+
 ### builds.onResponse
 
 A custom hook that can be used before dispatching the response, it relies on [Fastify's `onResponse` hook](https://github.com/fastify/fastify-reply-from#onresponserequest-reply-res):
