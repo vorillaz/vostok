@@ -5,10 +5,15 @@ const fastify = require('fastify')({
 const port = process.env.PORT || 3001;
 
 // Declare a route
-fastify.get('/', function(request, reply) {
+fastify.get('/', function (request, reply) {
+  const {headers = {}} = request;
+
+  console.log(request.headers);
+
   reply.send({
     hello: 'api',
     another: 'key',
+    'vostok-request': headers['request-time'],
     keys: {
       comment_foo: 'This one is coming from vostok.config.js',
       foo: process.env.LOCAL_KEY,
@@ -19,7 +24,7 @@ fastify.get('/', function(request, reply) {
 });
 
 // Run the server!
-fastify.listen(port, function(err, address) {
+fastify.listen(port, function (err, address) {
   if (err) {
     fastify.log.error(err);
     process.exit(1);
