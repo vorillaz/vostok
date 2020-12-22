@@ -22,7 +22,11 @@ module.exports = {
       pkg: 'home',
       dest: '/'
     },
-
+    {
+      pkg: 'test-prefix',
+      dest: '/test-prefix',
+      rewritePrefix: 'hello'
+    },
     {
       pkg: 'auth',
       dest: '/auth'

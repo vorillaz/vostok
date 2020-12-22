@@ -16,6 +16,7 @@ const createServer = async ({server, build, spawnOpts = {}}) => {
     dest = '/',
     headers = {},
     env: buildEnv = {},
+    rewritePrefix = '',
     onResponse = (request, reply, res) => {
       reply.send(res);
     },
@@ -44,7 +45,6 @@ const createServer = async ({server, build, spawnOpts = {}}) => {
   };
 
   if (use === static) {
-    console.log('static');
     await server.register(staticFastify, {
       prefix: dest,
       prefixAvoidTrailingSlash: true,
@@ -56,6 +56,7 @@ const createServer = async ({server, build, spawnOpts = {}}) => {
     await server.register(proxy, {
       upstream: `http://localhost:${port}`,
       prefix: dest,
+      rewritePrefix,
       replyOptions: {
         rewriteRequestHeaders,
         onResponse: async (request, reply, res) => {

@@ -126,6 +126,22 @@ module.exports = {
 };
 ```
 
+### builds.rewritePrefix
+
+Rewrite the propagated prefix
+
+```js
+module.exports = {
+  builds: [
+    {
+      pkg: 'api',
+      dest: '/api',
+      rewritePrefix: 'hello'
+    }
+  ]
+};
+```
+
 ### builds.onResponse
 
 A custom hook that can be used before dispatching the response, it relies on [Fastify's `onResponse` hook](https://github.com/fastify/fastify-reply-from#onresponserequest-reply-res):
