@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.5.6](https://github.com/vorillaz/vostok/compare/v1.5.5...v1.5.6) (2021-01-03)
+
+
+### Bug Fixes
+
+* add support for redirects ([17370fd](https://github.com/vorillaz/vostok/commit/17370fd4ab2e46e66b67afe5183ac67877f8bd8e))
+
 ### [1.5.5](https://github.com/vorillaz/vostok/compare/v1.5.4...v1.5.5) (2020-12-22)
 
 
