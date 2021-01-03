@@ -1324,38 +1324,23 @@ fastify-error@^0.2.0:
   resolved "https://registry.yarnpkg.com/fastify-error/-/fastify-error-0.2.0.tgz#9a1c28d4f42b6259e7a549671c8e5e2d85660634"
   integrity sha512-zabxsBatj59ROG0fhP36zNdc5Q1/eYeH9oSF9uvfrurZf8/JKfrJbMcIGrLpLWcf89rS6L91RHWm20A/X85hcA==
 
-fastify-http-proxy@4.1.0:
-  version "4.1.0"
-  resolved "https://registry.yarnpkg.com/fastify-http-proxy/-/fastify-http-proxy-4.1.0.tgz#297721862894f2a39a8b165661b17be90a8e10b4"
-  integrity sha512-QrON9SJqD1sop8h88TtBt/Xl+TmGqWrp/ZJeak31KQAGnnSKc8El8Apz2dzkDFNUOZJ7mluwfNvPHOuHzFgkeg==
-  dependencies:
-    fastify-reply-from "^3.1.3"
-    ws "^7.4.1"
-
-fastify-plugin@^2.3.3:
-  version "2.3.3"
-  resolved "https://registry.yarnpkg.com/fastify-plugin/-/fastify-plugin-2.3.3.tgz#795ad6d00ffb08d5c0af51edecd25dee4c668b42"
-  integrity sha512-KjVwrTlbOGBLhF80tAYQ8qXQKvc1G7ETlFZbU4n19V1Xoo9BRNQgicv36y9AvPDcIn1hpeHDOdpPkMW02NOVIQ==
-  dependencies:
-    semver "^7.3.2"
-
 fastify-plugin@^3.0.0:
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/fastify-plugin/-/fastify-plugin-3.0.0.tgz#cf1b8c8098e3b5a7c8c30e6aeb06903370c054ca"
   integrity sha512-ZdCvKEEd92DNLps5n0v231Bha8bkz1DjnPP/aEz37rz/q42Z5JVLmgnqR4DYuNn3NXAO3IDCPyRvgvxtJ4Ym4w==
 
-fastify-reply-from@^3.1.3:
-  version "3.2.0"
-  resolved "https://registry.yarnpkg.com/fastify-reply-from/-/fastify-reply-from-3.2.0.tgz#f05cb5feb1cdf8ece35733bbf2f9fd33a3c2f192"
-  integrity sha512-CgN3c4PkME/Picfuqsk6Esju2k2YWltDyXQDFeGf68aH5S3yHVVpKIyDnTv1LVC+1bTA5E2/Wgd4ZKWbx3g8JA==
+fastify-reply-from@3.5.0:
+  version "3.5.0"
+  resolved "https://registry.yarnpkg.com/fastify-reply-from/-/fastify-reply-from-3.5.0.tgz#ce9b472690b2685dcc9b57f431798783534d5e18"
+  integrity sha512-kNc0taosEyZz1DZBo/Dt4ihxF210gqalhRAiKFKT0VvGCL/+3A1JunlY/ExeoJUyfiCUWpRJ87pj4FCdrhbZLA==
   dependencies:
     end-of-stream "^1.4.1"
-    fastify-plugin "^2.3.3"
+    fastify-plugin "^3.0.0"
     http-errors "^1.8.0"
     pump "^3.0.0"
     semver "^7.2.1"
     tiny-lru "^7.0.0"
-    undici "^1.3.1"
+    undici "^2.1.0"
 
 fastify-static@3.3.0:
   version "3.3.0"
@@ -3739,10 +3724,10 @@ underscore@~1.6.0:
   resolved "https://registry.yarnpkg.com/underscore/-/underscore-1.6.0.tgz#8b38b10cacdef63337b8b24e4ff86d45aea529a8"
   integrity sha1-izixDKze9jM3uLJOT/htRa6lKag=
 
-undici@^1.3.1:
-  version "1.3.1"
-  resolved "https://registry.yarnpkg.com/undici/-/undici-1.3.1.tgz#2acad2a91177983e4fd99a81cc9f83d0e36a5227"
-  integrity sha512-NX7FzPHOrsIEHv3PDlVX4wzN1gB7WlCUzkcL2Y3rrEE4vKrlJ2Oyvn+QdACR5qpeCI7j3XtfDirGuZlkL2JDDw==
+undici@^2.1.0:
+  version "2.2.1"
+  resolved "https://registry.yarnpkg.com/undici/-/undici-2.2.1.tgz#7015c205530a3c71de867291d2196c50272a287b"
+  integrity sha512-21sJmMvJOMsyt/2pQPgB5Ruvm2ADTTm34NHRy4kzfeW9uMO7gK2oN0f+5KaJCmoKGJb8KxdU6yWpW0SphFHadw==
 
 unique-string@^2.0.0:
   version "2.0.0"
@@ -3918,10 +3903,10 @@ write-file-atomic@^3.0.3:
     signal-exit "^3.0.2"
     typedarray-to-buffer "^3.1.5"
 
-ws@^7.4.1:
-  version "7.4.1"
-  resolved "https://registry.yarnpkg.com/ws/-/ws-7.4.1.tgz#a333be02696bd0e54cea0434e21dcc8a9ac294bb"
-  integrity sha512-pTsP8UAfhy3sk1lSk/O/s4tjD0CRwvMnzvwr4OKGX7ZvqZtUyx4KIJB5JWbkykPoc55tixMGgTNoh3k4FkNGFQ==
+ws@7.4.2:
+  version "7.4.2"
+  resolved "https://registry.yarnpkg.com/ws/-/ws-7.4.2.tgz#782100048e54eb36fe9843363ab1c68672b261dd"
+  integrity sha512-T4tewALS3+qsrpGI/8dqNMLIVdq/g/85U98HPMa6F0m6xTbvhXU6RCQLqPH3+SlomNV/LdY6RXEbBpMH6EOJnA==
 
 xdg-basedir@^4.0.0:
   version "4.0.0"

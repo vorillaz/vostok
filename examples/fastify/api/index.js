@@ -23,6 +23,10 @@ fastify.get('/', function (request, reply) {
   });
 });
 
+fastify.get('/redirect', function (request, reply) {
+  reply.redirect('https://vorillaz.com');
+});
+
 // Run the server!
 fastify.listen(port, function (err, address) {
   if (err) {

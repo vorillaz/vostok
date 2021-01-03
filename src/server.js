@@ -1,6 +1,6 @@
 const path = require('path');
 const staticFastify = require('fastify-static');
-const proxy = require('fastify-http-proxy');
+const proxy = require('./proxy');
 const {builds} = require('./constants');
 const {logErr, getPort} = require('./utils');
 const run = require('./run');
