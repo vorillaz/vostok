@@ -1337,19 +1337,6 @@ fastify-plugin@^3.0.0:
   resolved "https://registry.yarnpkg.com/fastify-plugin/-/fastify-plugin-3.0.0.tgz#cf1b8c8098e3b5a7c8c30e6aeb06903370c054ca"
   integrity sha512-ZdCvKEEd92DNLps5n0v231Bha8bkz1DjnPP/aEz37rz/q42Z5JVLmgnqR4DYuNn3NXAO3IDCPyRvgvxtJ4Ym4w==
 
-fastify-reply-from@3.5.0:
-  version "3.5.0"
-  resolved "https://registry.yarnpkg.com/fastify-reply-from/-/fastify-reply-from-3.5.0.tgz#ce9b472690b2685dcc9b57f431798783534d5e18"
-  integrity sha512-kNc0taosEyZz1DZBo/Dt4ihxF210gqalhRAiKFKT0VvGCL/+3A1JunlY/ExeoJUyfiCUWpRJ87pj4FCdrhbZLA==
-  dependencies:
-    end-of-stream "^1.4.1"
-    fastify-plugin "^3.0.0"
-    http-errors "^1.8.0"
-    pump "^3.0.0"
-    semver "^7.2.1"
-    tiny-lru "^7.0.0"
-    undici "^2.1.0"
-
 fastify-reply-from@^5.0.1:
   version "5.2.0"
   resolved "https://registry.yarnpkg.com/fastify-reply-from/-/fastify-reply-from-5.2.0.tgz#7cfadbf15fba388dbe7355d5fea7e9c507f838b1"
@@ -1815,9 +1802,9 @@ inherits@2, inherits@2.0.4, inherits@^2.0.3, inherits@~2.0.3:
   integrity sha512-k/vGaX4/Yla3WzyMCvTQOXYeIHvqOKtnqBduzTHpzpQZzAskKMhZ2K+EnBiSM9zGSoIFeMpXKxa4dYeZIQqewQ==
 
 ini@^1.3.4, ini@^1.3.5, ini@~1.3.0:
-  version "1.3.5"
-  resolved "https://registry.yarnpkg.com/ini/-/ini-1.3.5.tgz#eee25f56db1c9ec6085e0c22778083f596abf927"
-  integrity sha512-RZY5huIKCMRWDUqZlEi72f/lmXKMvuszcMBduliQ3nnWbx9X/ZBQO7DijMEYS9EhHBb2qacRUMtC7svLwe0lcw==
+  version "1.3.8"
+  resolved "https://registry.yarnpkg.com/ini/-/ini-1.3.8.tgz#a29da425b48806f34767a4efce397269af28432c"
+  integrity sha512-JV/yugV2uzW5iMRSiZAyDtQd+nxtUnjeLt0acNdw98kKLrvuRVyB80tsREOE7yvGVgalhZ6RNXCmEHkUKBKxew==
 
 ipaddr.js@1.9.1:
   version "1.9.1"
@@ -3745,11 +3732,6 @@ underscore@~1.6.0:
   resolved "https://registry.yarnpkg.com/underscore/-/underscore-1.6.0.tgz#8b38b10cacdef63337b8b24e4ff86d45aea529a8"
   integrity sha1-izixDKze9jM3uLJOT/htRa6lKag=
 
-undici@^2.1.0:
-  version "2.2.1"
-  resolved "https://registry.yarnpkg.com/undici/-/undici-2.2.1.tgz#7015c205530a3c71de867291d2196c50272a287b"
-  integrity sha512-21sJmMvJOMsyt/2pQPgB5Ruvm2ADTTm34NHRy4kzfeW9uMO7gK2oN0f+5KaJCmoKGJb8KxdU6yWpW0SphFHadw==
-
 undici@^3.3.1:
   version "3.3.5"
   resolved "https://registry.yarnpkg.com/undici/-/undici-3.3.5.tgz#def08ab52286f6732305493e0421a3abf10b0867"
@@ -3928,11 +3910,6 @@ write-file-atomic@^3.0.3:
     is-typedarray "^1.0.0"
     signal-exit "^3.0.2"
     typedarray-to-buffer "^3.1.5"
-
-ws@7.4.2:
-  version "7.4.2"
-  resolved "https://registry.yarnpkg.com/ws/-/ws-7.4.2.tgz#782100048e54eb36fe9843363ab1c68672b261dd"
-  integrity sha512-T4tewALS3+qsrpGI/8dqNMLIVdq/g/85U98HPMa6F0m6xTbvhXU6RCQLqPH3+SlomNV/LdY6RXEbBpMH6EOJnA==
 
 ws@^7.4.1:
   version "7.4.5"
