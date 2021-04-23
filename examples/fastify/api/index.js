@@ -8,7 +8,7 @@ const port = process.env.PORT || 3001;
 fastify.get('/', function (request, reply) {
   const {headers = {}} = request;
 
-  console.log(request.headers);
+  console.log(request.headers, 'headers');
 
   reply.send({
     hello: 'api',

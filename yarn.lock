@@ -1324,6 +1324,14 @@ fastify-error@^0.2.0:
   resolved "https://registry.yarnpkg.com/fastify-error/-/fastify-error-0.2.0.tgz#9a1c28d4f42b6259e7a549671c8e5e2d85660634"
   integrity sha512-zabxsBatj59ROG0fhP36zNdc5Q1/eYeH9oSF9uvfrurZf8/JKfrJbMcIGrLpLWcf89rS6L91RHWm20A/X85hcA==
 
+fastify-http-proxy@^5.0.0:
+  version "5.0.0"
+  resolved "https://registry.yarnpkg.com/fastify-http-proxy/-/fastify-http-proxy-5.0.0.tgz#9c24826add22cd6de9e7260696e0e986415c1fda"
+  integrity sha512-sky2KzumdjSTd7IjKVtSF3KLOz/m4rWvTRgXe/7gR4qnDAsQubiLUM80ZVbVwLGcrPq/1PHVf2ZsfSUMmbHhAQ==
+  dependencies:
+    fastify-reply-from "^5.0.1"
+    ws "^7.4.1"
+
 fastify-plugin@^3.0.0:
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/fastify-plugin/-/fastify-plugin-3.0.0.tgz#cf1b8c8098e3b5a7c8c30e6aeb06903370c054ca"
@@ -1341,6 +1349,19 @@ fastify-reply-from@3.5.0:
     semver "^7.2.1"
     tiny-lru "^7.0.0"
     undici "^2.1.0"
+
+fastify-reply-from@^5.0.1:
+  version "5.2.0"
+  resolved "https://registry.yarnpkg.com/fastify-reply-from/-/fastify-reply-from-5.2.0.tgz#7cfadbf15fba388dbe7355d5fea7e9c507f838b1"
+  integrity sha512-b0UAA2IljwczqqaqY7DyHoxrb3g81LztjlLxNI6mwJnlfWrfpRsEHwXlk04wunuZDZJrOj5ZkyVed/aAgyNvbA==
+  dependencies:
+    end-of-stream "^1.4.1"
+    fastify-plugin "^3.0.0"
+    http-errors "^1.8.0"
+    pump "^3.0.0"
+    semver "^7.2.1"
+    tiny-lru "^7.0.0"
+    undici "^3.3.1"
 
 fastify-static@3.3.0:
   version "3.3.0"
@@ -3729,6 +3750,11 @@ undici@^2.1.0:
   resolved "https://registry.yarnpkg.com/undici/-/undici-2.2.1.tgz#7015c205530a3c71de867291d2196c50272a287b"
   integrity sha512-21sJmMvJOMsyt/2pQPgB5Ruvm2ADTTm34NHRy4kzfeW9uMO7gK2oN0f+5KaJCmoKGJb8KxdU6yWpW0SphFHadw==
 
+undici@^3.3.1:
+  version "3.3.5"
+  resolved "https://registry.yarnpkg.com/undici/-/undici-3.3.5.tgz#def08ab52286f6732305493e0421a3abf10b0867"
+  integrity sha512-d8okKB9SxyOhK5qtpuDjJUHY2/pm9geMSMm2ZelJ4DuYyv5BGayggazlCn0BIKrYrwKQtwmUsXDbS+s05ff19w==
+
 unique-string@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/unique-string/-/unique-string-2.0.0.tgz#39c6451f81afb2749de2b233e3f7c5e8843bd89d"
@@ -3907,6 +3933,11 @@ ws@7.4.2:
   version "7.4.2"
   resolved "https://registry.yarnpkg.com/ws/-/ws-7.4.2.tgz#782100048e54eb36fe9843363ab1c68672b261dd"
   integrity sha512-T4tewALS3+qsrpGI/8dqNMLIVdq/g/85U98HPMa6F0m6xTbvhXU6RCQLqPH3+SlomNV/LdY6RXEbBpMH6EOJnA==
+
+ws@^7.4.1:
+  version "7.4.5"
+  resolved "https://registry.yarnpkg.com/ws/-/ws-7.4.5.tgz#a484dd851e9beb6fdb420027e3885e8ce48986c1"
+  integrity sha512-xzyu3hFvomRfXKH8vOFMU3OguG6oOvhXMo3xsGy3xWExqaM2dxBbVxuD99O7m3ZUFMvvscsZDqxfgMaRr/Nr1g==
 
 xdg-basedir@^4.0.0:
   version "4.0.0"
