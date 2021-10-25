@@ -35,17 +35,17 @@
     "dotenv": "8.2.0",
     "fastify": "3.9.2",
     "fastify-http-proxy": "^5.0.0",
-    "fastify-static": "3.3.0",
+    "fastify-static": "^4.4.2",
     "fs-extra": "9.0.1",
     "minimist": "1.2.5",
     "semver": "7.3.4"
   },
   "devDependencies": {
     "@commitlint/cli": "latest",
-    "@commitlint/config-conventional": "latest",
-    "ava": "3.14.0",
+    "@commitlint/config-conventional": "^13.2.0",
+    "ava": "^3.15.0",
     "finepack": "latest",
-    "husky": "latest",
+    "husky": "^7.0.0",
     "lint-staged": "latest",
     "prettier": "2.2.1"
   },
@@ -55,7 +55,8 @@
   ],
   "scripts": {
     "test": "ava",
-    "test:watch": "ava --watch --verbose"
+    "test:watch": "ava --watch --verbose",
+    "prepare": "husky install"
   },
   "license": "MIT",
   "ava": {
@@ -67,24 +68,5 @@
       "test/fixtures"
     ],
     "verbose": true
-  },
-  "commitlint": {
-    "extends": [
-      "@commitlint/config-conventional"
-    ]
-  },
-  "husky": {
-    "hooks": {
-      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS",
-      "pre-commit": "lint-staged"
-    }
-  },
-  "lint-staged": {
-    "*.{js,md}": [
-      "prettier --write"
-    ],
-    "package.json": [
-      "finepack"
-    ]
   }
 }
