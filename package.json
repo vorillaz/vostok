@@ -2,7 +2,7 @@
   "name": "vostok",
   "description": "A simple proxy gateway for microservices",
   "homepage": "https://github.com/vorillaz/vostok#readme",
-  "version": "1.5.8",
+  "version": "1.5.9",
   "bin": {
     "vostok": "./bin/vostok"
   },

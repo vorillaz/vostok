@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.5.9](https://github.com/vorillaz/vostok/compare/v1.5.8...v1.5.9) (2021-10-25)
+
+
+### Bug Fixes
+
+* dependencies and husky ([5172b3d](https://github.com/vorillaz/vostok/commit/5172b3de21308749228854bc7a98df758ba33a97))
+
 ### [1.5.8](https://github.com/vorillaz/vostok/compare/v1.5.6...v1.5.8) (2021-05-31)
 
 
