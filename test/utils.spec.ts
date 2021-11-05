@@ -1,38 +1,33 @@
-const test = require('ava');
-const {join} = require('path');
-const {once} = require('events');
-const http = require('http');
-const fs = require('fs-extra');
+import anyTest, { TestInterface } from 'ava';
+const test = anyTest as TestInterface<{}>;
 
-const {
+import { join } from 'path';
+import { once } from 'events';
+import http from 'http';
+import fs from 'fs-extra';
+
+import {
   spawn,
   getConfig,
-  getArgs,
   getPort,
   getNextPort,
-  chalkErr,
-  chalkSuccess,
-  chalkInfo,
   loadEnv,
   filterBuilds,
-  isPortTaken
-} = require('../src/utils');
+  isPortTaken,
+  logErr,
+  logInfo,
+  log
+} from '../src/utils';
 
 test.serial('filterBuilds', t => {
-  const fooBuild = [{pkg: 'foo'}];
-  const barBuild = [{pkg: 'bar'}];
+  const fooBuild = [{ pkg: 'foo' }];
+  const barBuild = [{ pkg: 'bar' }];
   const fooBarBuild = [...fooBuild, ...barBuild];
 
   t.deepEqual(filterBuilds([]), []);
   t.deepEqual(filterBuilds([{}]), [{}]);
   t.deepEqual(filterBuilds(fooBuild), fooBuild);
   t.deepEqual(filterBuilds(fooBarBuild), fooBarBuild);
-
-  t.deepEqual(filterBuilds(fooBarBuild, 'foo'), fooBuild);
-  t.deepEqual(filterBuilds(fooBarBuild, 'bar'), barBuild);
-
-  t.deepEqual(filterBuilds(fooBarBuild, 'foo, bar'), fooBarBuild);
-  t.deepEqual(filterBuilds(fooBarBuild, 'foo,bar'), fooBarBuild);
 });
 
 test.serial('getConfig', async t => {
@@ -88,35 +83,12 @@ test('isPortTaken detects TCP ports already in use', async t => {
   server.close();
 });
 
-test.serial('chalkErr', t => {
-  t.is(chalkErr('foo'), 'foo');
+test.serial('logErr', t => {
+  t.snapshot(logErr('foo'));
 });
 
-test.serial('chalkSuccess', t => {
-  t.is(chalkSuccess('foo'), 'foo');
-});
-
-test.serial('chalkInfo', t => {
-  t.is(chalkInfo('foo'), 'foo');
-});
-
-test.serial('getArgs maps the default arguments', async t => {
-  const args = await getArgs();
-  t.snapshot(args);
-});
-
-test.serial('getArgs with passed arguments', async t => {
-  const args = await getArgs({l: true, port: 8000});
-  t.snapshot(args);
-});
-
-test.serial('getArgs with cli arguments', async t => {
-  const oldArgv = process.argv;
-  const injectedArgv = [...oldArgv.slice(0, 2), '-p', 1333, '-l', true];
-  process.argv = [...injectedArgv];
-  const args = await getArgs();
-  process.argv = oldArgv;
-  t.snapshot(args);
+test.serial('log', t => {
+  t.snapshot(log('foo'));
 });
 
 test.serial('spawn executes a common shell command', async t => {
@@ -126,6 +98,7 @@ test.serial('spawn executes a common shell command', async t => {
     await fs.remove(target);
   } catch (error) {}
 
+  // @ts-ignore
   await spawn('cp', [original, target]);
   const file = fs.lstat(target);
 
