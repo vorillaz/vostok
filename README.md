@@ -35,6 +35,7 @@ Using Vostok you can fairly easily create a reverse proxy for your application, 
 Vostok relies on a simple configuration file called `vostok.config.js` which has to be placed in the root of your project. A sample config would look like this:
 
 ```js
+/** @type {import('vostok').VostokConfig} */
 module.exports = {
   version: 2,
   comment: 'Basic microservices setup',
@@ -55,24 +56,6 @@ Each `build` can get declated independently, thus we can redirect the ouput from
 
 Additionally we can can preprocess the ouput of the builds using additional options.
 
-### builds.headers
-
-We can pass through HTTP headers using the `headers` options as:
-
-```js
-module.exports = {
-  builds: [
-    {
-      pkg: 'home',
-      dest: '/',
-      headers: {
-        cache: 'HIT'
-      }
-    }
-  ]
-};
-```
-
 ### builds.port
 
 Vostok handles port mapping dynamically, but sometimes we may need to manually mount the port of the build:
@@ -83,7 +66,7 @@ module.exports = {
     {
       pkg: 'home',
       dest: '/',
-      port: 3000
+      port: 1312
     }
   ]
 };
@@ -91,7 +74,7 @@ module.exports = {
 
 ### builds.env
 
-Pass the environment variables to the build:
+By default Vostok will load and configure every envinromental variables found in the project. But you can also distinguish passed through variables.
 
 ```js
 module.exports = {
@@ -107,72 +90,17 @@ module.exports = {
 };
 ```
 
-### builds.rewriteRequestHeaders
-
-A custom hook that allows headers parsing and rewriting.
-
-```js
-module.exports = {
-  builds: [
-    {
-      pkg: 'api',
-      dest: '/api',
-      rewriteRequestHeaders: (request, headers) => ({
-        ...headers,
-        'request-id': uuid()
-      })
-    }
-  ]
-};
-```
-
-### builds.rewritePrefix
-
-Rewrite the propagated prefix
-
-```js
-module.exports = {
-  builds: [
-    {
-      pkg: 'api',
-      dest: '/api',
-      rewritePrefix: 'hello'
-    }
-  ]
-};
-```
-
-### builds.onResponse
-
-A custom hook that can be used before dispatching the response, it relies on [Fastify's `onResponse` hook](https://github.com/fastify/fastify-reply-from#onresponserequest-reply-res):
-
-```js
-module.exports = {
-  builds: [
-    {
-      pkg: 'api',
-      dest: '/api',
-      onResponse: async (request, reply, res) => {
-        reply.removeHeader('content-length');
-        reply.header('cache', 'HIT');
-        // Don't forget this line as the response won't get back.
-        reply.send(res);
-      }
-    }
-  ]
-};
-```
-
 ## CLI
 
 ### `vostok dev`
 
 Runs Vostok in development mode, using the `vostok.config.js` you can configure the sub app entry points.
-The dev option allows you yo pass down some additional params:
+The dev option allows you to pass down some additional params:
 
-- `-p 4011` Choose the port for Vostok
-- `-a app,lib` Run Vostok with specific apps.
-- `l` See Vostok's logging info.
+- `-a, --apps` Run specific builds
+- `-c, --config` Choose another vostok configuration file,
+- `-d, --debug` See Vostok's logging info.
+- `-p, --port` Run Vostok on a specific port.
 
 ## Working examples
 
@@ -180,10 +108,3 @@ The dev option allows you yo pass down some additional params:
 - [Microbundle](/examples/microbundle)
 - [Next.js multiple apps](/examples/nextjs)
 - [Simple HTTP server](/examples/simple-server)
-
-## Next up.
-
-- Add `vostok install` with workspaces support.
-- Finalize `vostok build`.
-- Add sourcemaps for `@vostok/node`.
-- Better error handling, bundling and spin up for child processes.

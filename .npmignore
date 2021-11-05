@@ -10,8 +10,6 @@
 .history
 *.log
 report
-build
-dist
 es
 assets
 vostok.json
