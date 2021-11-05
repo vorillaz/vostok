@@ -4,8 +4,6 @@ const fastify = require('fastify')({
 
 const port = process.env.PORT || 3001;
 
-console.log(port);
-
 // Declare a route
 fastify.get('/api', function (request, reply) {
   reply.send({
