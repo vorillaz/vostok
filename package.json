@@ -4,7 +4,11 @@
   "homepage": "https://github.com/vorillaz/vostok#readme",
   "version": "1.5.9",
   "bin": {
-    "vostok": "./bin/vostok"
+    "vostok": "./build/vostok.js"
+  },
+  "types": "vostok.d.ts",
+  "pkg": {
+    "scripts": "build/**/*.js"
   },
   "author": {
     "name": "@vorillaz"
@@ -28,45 +32,55 @@
     "tools"
   ],
   "dependencies": {
-    "boxen": "4.2.0",
-    "chalk": "4.1.0",
-    "clipboardy": "2.3.0",
+    "chalk": "4.1.2",
+    "clipboardy": "3.0.0",
     "cross-spawn": "7.0.3",
-    "dotenv": "8.2.0",
-    "fastify": "3.9.2",
-    "fastify-http-proxy": "^5.0.0",
-    "fastify-static": "^4.4.2",
-    "fs-extra": "9.0.1",
+    "dotenv": "10.0.0",
+    "express": "4.17.1",
+    "fs-extra": "10.0.0",
+    "http-proxy-middleware": "2.0.1",
     "minimist": "1.2.5",
-    "semver": "7.3.4"
+    "semver": "7.3.4",
+    "yargs": "17.2.1"
   },
   "devDependencies": {
     "@commitlint/cli": "latest",
     "@commitlint/config-conventional": "^13.2.0",
+    "@types/cross-spawn": "^6.0.2",
+    "@types/express": "4.17.13",
+    "@types/fs-extra": "9.0.12",
+    "@types/node": "16.11.6",
+    "@types/yargs": "17.0.2",
     "ava": "^3.15.0",
+    "esbuild": "0.13.12",
+    "esbuild-plugin-node-externals": "0.2.0",
     "finepack": "latest",
     "husky": "^7.0.0",
     "lint-staged": "latest",
-    "prettier": "2.2.1"
+    "prettier": "2.2.1",
+    "ts-node": "10.0.0",
+    "typescript": "4.4.4"
   },
   "files": [
-    "bin",
-    "src"
+    "/assets",
+    "/build"
   ],
   "scripts": {
+    "build": "rm -rf build & node esbuild/index.js",
+    "build:watch": "npm run build -- --watch",
     "test": "ava",
+    "test:ci": "nyc ava --fail-fast",
     "test:watch": "ava --watch --verbose",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "type-check": "tsc"
   },
   "license": "MIT",
   "ava": {
-    "concurrency": 5,
-    "files": [
-      "test/**/*.js"
+    "extensions": [
+      "ts"
     ],
-    "ignoredByWatcher": [
-      "test/fixtures"
-    ],
-    "verbose": true
+    "require": [
+      "ts-node/register"
+    ]
   }
 }
