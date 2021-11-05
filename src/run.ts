@@ -1,18 +1,28 @@
-const {existsSync, lstatSync} = require('fs-extra');
-const {join} = require('path');
-const {logErr, spawn} = require('./utils');
+import { existsSync, lstatSync } from 'fs-extra';
+import { join } from 'path';
+import { logErr, spawn } from './utils';
+import { SpawnOptions } from 'child_process';
 
-const hasYarn = pkg =>
+const hasYarn = (pkg: string) =>
   existsSync(join(process.cwd(), 'yarn.lock')) ||
   existsSync(join(process.cwd(), pkg, 'yarn.lock'));
 
-const isDir = dirPath =>
-  existsSync(dirPath) && lstatSync(dirPath).isDirectory();
+const isDir = (dirPath?: string) =>
+  dirPath && existsSync(dirPath) && lstatSync(dirPath).isDirectory();
 
-const isFile = filePath => existsSync(filePath) && lstatSync(filePath).isFile();
+const isFile = (filePath?: string) =>
+  filePath && existsSync(filePath) && lstatSync(filePath).isFile();
 
-const run = async ({pkg, command, opts}) => {
-  const pkgPath = join(process.cwd(), pkg);
+const run = async ({
+  pkg,
+  command,
+  opts
+}: {
+  pkg: string;
+  command: string;
+  opts: SpawnOptions;
+}) => {
+  const pkgPath = join(process.cwd(), pkg) as string;
 
   if (!isDir(pkgPath)) {
     logErr(`${pkg} should be a directory`);
@@ -28,7 +38,7 @@ const run = async ({pkg, command, opts}) => {
 
   const pkgJson = require(pkgPackagePath);
 
-  const {scripts = null} = pkgJson;
+  const { scripts = null } = pkgJson;
   if (scripts === null) {
     logErr(`${pkg}/package.json does not have any scripts!`);
     process.exit(0);
@@ -45,7 +55,7 @@ const run = async ({pkg, command, opts}) => {
   } else {
     spawn('npm', ['run', command], opts);
   }
-  return {pkg, opts};
+  return { pkg, opts };
 };
 
-module.exports = run;
+export default run;
