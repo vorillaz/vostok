@@ -2,10 +2,10 @@ const fastify = require('fastify')({
   logger: true
 });
 
-const port = process.env.PORT || 3001;
+const port = process.env.PORT || 3003;
 
 // Declare a route
-fastify.get('/', function (request, reply) {
+fastify.get('/image', function (request, reply) {
   reply.type('text/html').send(`
     <!DOCTYPE html>
     <html lang="en">
@@ -19,6 +19,17 @@ fastify.get('/', function (request, reply) {
       </body>
     </html>
   `);
+});
+
+fastify.get('/home', function (request, reply) {
+  reply.send({
+    this_is: 'home'
+  });
+});
+fastify.get('/', function (request, reply) {
+  reply.send({
+    this_is: 'home'
+  });
 });
 
 // Run the server!

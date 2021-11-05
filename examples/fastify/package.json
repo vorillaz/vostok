@@ -4,13 +4,19 @@
   "private": true,
   "description": "A simple microservices example",
   "main": "index.js",
+  "workspaces": [
+    "api",
+    "auth",
+    "home",
+    "test-prefix"
+  ],
   "scripts": {
-    "dev": "vostok"
+    "dev": "vostok dev"
   },
   "author": "@vorillaz",
   "license": "MIT",
   "devDependencies": {
-    "vostok": "latest"
+    "vostok": "../../."
   },
   "dependencies": {
     "fastify": "^2.14.1"

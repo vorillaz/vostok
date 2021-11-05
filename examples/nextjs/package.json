@@ -2,14 +2,18 @@
   "name": "multiple-nextjs-apps",
   "version": "1.0.0",
   "private": true,
+  "workspaces": [
+    "docs",
+    "home"
+  ],
   "description": "Using multiple Next.js",
   "scripts": {
-    "dev": "vostok"
+    "dev": "vostok dev"
   },
   "author": "@vorillaz",
   "license": "MIT",
   "devDependencies": {
-    "vostok": "latest"
+    "vostok": "../../."
   },
   "dependencies": {
     "fastify": "^2.14.1"

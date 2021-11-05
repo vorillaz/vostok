@@ -1,3 +1,6 @@
-module.exports = (phase, {defaultConfig}) => {
-  return {...defaultConfig, basePath: '/docs'};
+module.exports = phase => {
+  return {
+    assetPrefix: '/docs',
+    basePath: '/docs'
+  };
 };

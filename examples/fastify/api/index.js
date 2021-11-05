@@ -4,16 +4,13 @@ const fastify = require('fastify')({
 
 const port = process.env.PORT || 3001;
 
+console.log(port);
+
 // Declare a route
-fastify.get('/', function (request, reply) {
-  const {headers = {}} = request;
-
-  console.log(request.headers, 'headers');
-
+fastify.get('/api', function (request, reply) {
   reply.send({
     hello: 'api',
     another: 'key',
-    'vostok-request': headers['request-time'],
     keys: {
       comment_foo: 'This one is coming from vostok.config.js',
       foo: process.env.LOCAL_KEY,
@@ -23,7 +20,7 @@ fastify.get('/', function (request, reply) {
   });
 });
 
-fastify.get('/redirect', function (request, reply) {
+fastify.get('/api/redirect', function (request, reply) {
   reply.redirect('https://vorillaz.com');
 });
 
@@ -33,5 +30,5 @@ fastify.listen(port, function (err, address) {
     fastify.log.error(err);
     process.exit(1);
   }
-  fastify.log.info(`Auth server listening on ${address}`);
+  fastify.log.info(`API server listening on ${address}`);
 });

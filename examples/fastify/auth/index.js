@@ -5,12 +5,12 @@ const fastify = require('fastify')({
 const port = process.env.PORT || 3002;
 
 // Declare a route
-fastify.get('/', function(request, reply) {
-  reply.send({hello: 'auth'});
+fastify.get('/auth', function (request, reply) {
+  reply.send({ hello: 'auth' });
 });
 
 // Run the server!
-fastify.listen(port, function(err, address) {
+fastify.listen(port, function (err, address) {
   if (err) {
     fastify.log.error(err);
     process.exit(1);

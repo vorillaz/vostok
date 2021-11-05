@@ -5,11 +5,9 @@ export default function Docs() {
     <div>
       <p>Hello Docs</p>
       <p>
-        <Link href="/about">
-          <a>
-            Go to <strong>docs/about</strong>
-          </a>
-        </Link>
+        <a href="/docs">
+          Go to <strong>docs</strong>
+        </a>
       </p>
       <p>
         <a href="/">Return to home</a>

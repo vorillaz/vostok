@@ -3,12 +3,12 @@ module.exports = {
   comment: 'Basic microservices setup',
   builds: [
     {
+      pkg: 'home',
+      dest: '/'
+    },
+    {
       pkg: 'api',
       dest: '/api',
-      rewriteRequestHeaders: (originalReq, headers) => ({
-        ...headers,
-        'request-time': Date.now()
-      }),
       env: {
         LOCAL_KEY: 'this is coming from vostok.config.js'
       }
@@ -19,13 +19,8 @@ module.exports = {
       use: '@vostok/static'
     },
     {
-      pkg: 'home',
-      dest: '/'
-    },
-    {
       pkg: 'test-prefix',
-      dest: '/test-prefix',
-      rewritePrefix: 'hello'
+      dest: '/test-prefix'
     },
     {
       pkg: 'auth',
