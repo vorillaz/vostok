@@ -1,6 +1,6 @@
 module.exports = phase => {
   return {
-    assetPrefix: '/docs',
-    basePath: '/docs'
+    assetPrefix: '/documentation',
+    basePath: '/documentation'
   };
 };

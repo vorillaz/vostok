@@ -1,3 +1,4 @@
+/** @type {import('vostok').VostokConfig} */
 module.exports = {
   version: 2,
   comment: 'Basic microservices setup',
@@ -9,6 +10,7 @@ module.exports = {
     {
       pkg: 'api',
       dest: '/api',
+      port: 8001,
       env: {
         LOCAL_KEY: 'this is coming from vostok.config.js'
       }
@@ -19,6 +21,7 @@ module.exports = {
       use: '@vostok/static'
     },
     {
+      port: 8002,
       pkg: 'test-prefix',
       dest: '/test-prefix'
     },
