@@ -52,6 +52,29 @@ module.exports = {
 };
 ```
 
+For dynamic build steps you can also use a function:
+
+```js
+/** @type {import('vostok').VostokConfig} */
+module.exports = async () => {
+  const hello = await doSomeIo();
+  return {
+    version: 2,
+    comment: 'Basic microservices setup',
+    builds: [
+      {
+        pkg: 'home',
+        dest: '/'
+      },
+      {
+        pkg: 'docs',
+        dest: '/docs'
+      }
+    ]
+  };
+};
+```
+
 Each `build` can get declated independently, thus we can redirect the ouput from subproject `home` to `localhost:3000/`, the output from `docs` to `localhost:3000/docs` and so on.
 
 Additionally we can can preprocess the ouput of the builds using additional options.
@@ -84,6 +107,45 @@ module.exports = {
       dest: '/api',
       env: {
         LOCAL_KEY: 'this is coming from vostok.config.js'
+      }
+    }
+  ]
+};
+```
+
+### builds.router
+
+Used in order to manipulate the routing options, it could be an object or a function and make vostok more flexible.
+
+```js
+module.exports = {
+  builds: [
+    {
+      pkg: 'home',
+      dest: '/',
+      router: {
+        'localhost:3000': 'http://localhost:8001', // host only
+        'staging.localhost:3000': 'http://localhost:8002', // host only
+        'localhost:3000/api': 'http://localhost:8003', // host + path
+        '/rest': 'http://localhost:8004' // path only
+      }
+    },
+    {
+      pkg: 'api',
+      dest: '/api',
+      router: function (req) {
+        return 'http://localhost:8004';
+      }
+    },
+    {
+      pkg: 'api',
+      dest: '/api',
+      router: function (req) {
+        return {
+          protocol: 'https:', // The : is required
+          host: 'localhost',
+          port: 8004
+        };
       }
     }
   ]
