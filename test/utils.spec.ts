@@ -19,13 +19,18 @@ import {
   log
 } from '../src/utils';
 
+const defaultBuild = {
+  pkg: '',
+  dest: ''
+};
+
 test.serial('filterBuilds', t => {
-  const fooBuild = [{ pkg: 'foo' }];
-  const barBuild = [{ pkg: 'bar' }];
+  const fooBuild = [{ pkg: 'foo', dest: '/foo' }];
+  const barBuild = [{ pkg: 'bar', dest: '/bar' }];
   const fooBarBuild = [...fooBuild, ...barBuild];
 
   t.deepEqual(filterBuilds([]), []);
-  t.deepEqual(filterBuilds([{}]), [{}]);
+  t.deepEqual(filterBuilds([defaultBuild]), [defaultBuild]);
   t.deepEqual(filterBuilds(fooBuild), fooBuild);
   t.deepEqual(filterBuilds(fooBarBuild), fooBarBuild);
 });
