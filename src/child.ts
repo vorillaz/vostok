@@ -2,10 +2,10 @@ import path from 'path';
 import { Application } from 'express';
 import { createProxyMiddleware } from 'http-proxy-middleware';
 import { NODE_USE, STATIC_USE } from './constants';
-import { Build, getPort, logErr } from './utils';
+import { getPort, logErr } from './utils';
 import express from 'express';
 import run from './run';
-
+import { VostokBuild } from '../vostok';
 const createChildServer = async ({
   server,
   build,
@@ -13,7 +13,7 @@ const createChildServer = async ({
   spawnOpts = {}
 }: {
   server: Application;
-  build: Build;
+  build: VostokBuild;
   debug?: boolean;
   spawnOpts: { [key: string]: any };
 }) => {
@@ -21,10 +21,12 @@ const createChildServer = async ({
     use = NODE_USE,
     pkg = '',
     port: buildPort,
-    src = '/',
     dest = '/',
-    env: buildEnv = {}
+    env: buildEnv = {},
+    pathRewrite = {},
+    router = {}
   } = build;
+
   const port = buildPort ? buildPort : await getPort();
 
   if (pkg === null) {
@@ -48,7 +50,9 @@ const createChildServer = async ({
       createProxyMiddleware({
         target: `http://localhost:${port}`,
         ws: true, // proxy websockets for local development
-        logLevel: debug ? 'debug' : 'silent'
+        logLevel: debug ? 'debug' : 'silent',
+        router,
+        pathRewrite
       })
     );
 

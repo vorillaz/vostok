@@ -14,7 +14,7 @@ import {
   shouldUpdate
 } from '../utils';
 import createChildServer from '../child';
-import { NODE_USE, STATIC_USE } from '../constants';
+import { STATIC_USE } from '../constants';
 
 export const command = 'dev';
 export const aliases: Array<string> = ['d'];

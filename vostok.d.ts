@@ -1,9 +1,14 @@
 import { Usage } from './src/constants';
+import { Options } from 'http-proxy-middleware';
 
 export declare type VostokBuild = {
+  name?: string;
   pkg: string;
   dest: string;
-  port: number;
+  port?: number;
+  src?: string;
+  router?: Options['router'];
+  pathRewrite?: Options['pathRewrite'];
   env?: {
     [key: string]: any;
   };
@@ -13,7 +18,9 @@ export declare type VostokBuild = {
 export declare type VostokConfig = {
   [key: string]: any;
 } & {
-  version?: number;
+  version?: number | string;
   comment?: string;
-  builds: [];
+  builds: VostokBuild[];
 };
+
+export default VostokConfig;

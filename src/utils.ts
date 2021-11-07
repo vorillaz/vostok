@@ -6,20 +6,11 @@ import http from 'http';
 import https from 'https';
 import path from 'path';
 import { readFileSync, existsSync } from 'fs-extra';
-import { ALL_APPS, Usage, NODE_USE, STATIC_USE } from './constants';
+import { ALL_APPS, Usage } from './constants';
 import dotenv from 'dotenv';
 import { gt } from 'semver';
 import { version as currentVersion } from '../package.json';
-
-export type Build = {
-  name?: string;
-  dest?: string;
-  use?: Usage;
-  pkg?: string;
-  port?: number;
-  src?: string;
-  env?: { [key: string]: string };
-};
+import { VostokBuild } from '../vostok';
 
 const registry = 'https://api.npms.io/v2/package/vostok';
 
@@ -100,7 +91,10 @@ export const getConfig = async (config: string = 'vostok.config.js') => {
   }
 };
 
-export const filterBuilds = (builds: Build[], apps: string[] = [ALL_APPS]) => {
+export const filterBuilds = (
+  builds: VostokBuild[],
+  apps: string[] = [ALL_APPS]
+) => {
   if (apps[0] === ALL_APPS) {
     //   @ts-ignore
     return builds.sort((a, b) => {
@@ -138,7 +132,7 @@ export const loadEnv = (dest: string, dev = false) => {
   const hasLocalEnv = checkFile(localEnv) && dev;
 
   if (hasEnv) {
-    process.stderr.write(logInfo(`\n.env found and passed across all apps`));
+    process.stderr.write(logInfo(`\n.env found and passed across all apps\n`));
   }
 
   if (hasLocalEnv) {
