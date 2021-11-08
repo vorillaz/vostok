@@ -6,6 +6,7 @@
 .prettierrc
 .circleci
 .commitlintrc.js
+node_modules
 
 .history
 *.log
@@ -24,3 +25,4 @@ node_modules
 examples
 .rts*
 .env
+assets
