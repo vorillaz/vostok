@@ -64,6 +64,7 @@
   },
   "files": [
     "/build",
+    "/src",
     "vostok.d.ts"
   ],
   "scripts": {
