@@ -2,6 +2,38 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.9.0](https://github.com/vorillaz/vostok/compare/v1.5.9...v1.9.0) (2021-11-08)
+
+
+### Features
+
+* add better type support, add express proxy support and better styling ([1daa81b](https://github.com/vorillaz/vostok/commit/1daa81b4dc09b11e588096ea56f05280c66c3033))
+* add better typing and routing options ([9492298](https://github.com/vorillaz/vostok/commit/949229889f508af69b6a1ee192c2ed6e94d6ee6a))
+* add should update script ([2f06017](https://github.com/vorillaz/vostok/commit/2f060170affdb614dc30f72e3969d2307660d7ac))
+* add TS support ([52e6627](https://github.com/vorillaz/vostok/commit/52e6627ab9489c65e2ce0421c623f46704c575b5))
+* expose types ([25577c0](https://github.com/vorillaz/vostok/commit/25577c06b248c8ab4ac7b3913a95d150a471cf8c))
+* update the examples ([6a892ff](https://github.com/vorillaz/vostok/commit/6a892ff9f81bd69edf6e025f05974ea7bf7bc0d8))
+
+
+### Bug Fixes
+
+* add esbuild step ([d9bba16](https://github.com/vorillaz/vostok/commit/d9bba16eb5896f44fc1717424d67f2688073cb9b))
+* add github workflow ([de306b0](https://github.com/vorillaz/vostok/commit/de306b023b1b2088156c88bf591b2a7f3522458b))
+* config and changelog ([5ccfca3](https://github.com/vorillaz/vostok/commit/5ccfca3f39d2a7a5043c6438e17f707e5d406f68))
+* dependencies ([a24811d](https://github.com/vorillaz/vostok/commit/a24811d8ed3a0a9779f610c8434d765992c5902f))
+* examples ([a0a1434](https://github.com/vorillaz/vostok/commit/a0a14340605c831fe5faaab181fe6e1322db56e2))
+* github action flow ([fb77952](https://github.com/vorillaz/vostok/commit/fb77952490ebfee6bae98e8a7f74962d4179a24c))
+* husky config ([8e018fb](https://github.com/vorillaz/vostok/commit/8e018fb3b665518d6f9235c5a13349c0b50c2271))
+* remove circleci ([73bd056](https://github.com/vorillaz/vostok/commit/73bd056f0144dc2ca694776784224af59fdd3933))
+* remove old bin files ([6502992](https://github.com/vorillaz/vostok/commit/65029927032ac1b3c094dc416a32ed132545432f))
+* setup github actions and order with standard-version ([5afe6ca](https://github.com/vorillaz/vostok/commit/5afe6cae8e9029975395f4cac74fa490e9ddc207))
+* status and types of the npm package ([6b8f38b](https://github.com/vorillaz/vostok/commit/6b8f38bd285b12288c6abbb68f419ed21c36e38c))
+* status and types of the npm package ([642eb93](https://github.com/vorillaz/vostok/commit/642eb93cb8a1cc2555f2099ef60be32fbede8c2a))
+* stop messing up with the flow ([683f508](https://github.com/vorillaz/vostok/commit/683f508c6402a6db3117acad7248d4f965f55e69))
+* tests ([f37966c](https://github.com/vorillaz/vostok/commit/f37966c5de270dbca242e7ab8f46166c5caa27a7))
+* update docs ([566838e](https://github.com/vorillaz/vostok/commit/566838e20eed760e46c9e157d238349538590f1d))
+* upgrade tests ([087b5d2](https://github.com/vorillaz/vostok/commit/087b5d233443f171ce66428a3740514e0ffa284b))
+
 ## [1.8.0](https://github.com/vorillaz/vostok/compare/v1.5.9...v1.8.0) (2021-11-08)
 
 
