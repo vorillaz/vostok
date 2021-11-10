@@ -2,7 +2,7 @@
   "name": "vostok",
   "description": "A simple proxy gateway for microservices",
   "homepage": "https://github.com/vorillaz/vostok#readme",
-  "version": "1.9.0",
+  "version": "1.10.0",
   "bin": {
     "vostok": "./build/vostok.js"
   },
