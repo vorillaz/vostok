@@ -94,8 +94,9 @@ export const handler: DevHandler = async argv => {
     // Config is set spin up the server
     const server = express();
     const address = `http://localhost:${rootPort}`;
-    let msg = log('Vostok launched. 🛰️');
+    let msg = '';
     msg += `Booting and running at: ${log(address)}\n`;
+    msg += log('Vostok launched. 🛰️\n');
 
     const spawnOpts = {
       env: {
@@ -140,18 +141,20 @@ export const handler: DevHandler = async argv => {
 
     buildsInfo.forEach(buildInfo => {
       msg += `${logBold(
-        `- /${buildInfo.pkg} -> ${
+        `- [${buildInfo.pkg}]  ${
+          buildInfo.subdomain ? `${buildInfo.subdomain}.` : ''
+        }localhost:${rootPort}${buildInfo.dest} -> ${
           //   @ts-ignore
           buildInfo?.use === STATIC_USE
             ? 'Serving static content'
-            : buildInfo.port
+            : `localhost:${buildInfo.port}`
         }`
       )}`;
     });
 
     try {
       await clp.write(address);
-      msg += `\n\n${logInfo('Copied local address to clipboard!')}`;
+      msg += `\n${logInfo('Copied local address to clipboard!')}`;
     } catch (err) {
       process.stderr.write(
         // @ts-ignore
