@@ -4,11 +4,10 @@ import { Options } from 'http-proxy-middleware';
 export declare type VostokBuild = {
   name?: string;
   pkg: string;
-  dest: string;
+  dest?: string;
+  subdomain?: string;
   port?: number;
-  src?: string;
-  router?: Options['router'];
-  pathRewrite?: Options['pathRewrite'];
+
   env?: {
     [key: string]: any;
   };

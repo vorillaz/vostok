@@ -13,8 +13,11 @@ import {
   loadEnv,
   shouldUpdate
 } from '../utils';
-import createChildServer from '../child';
-import { STATIC_USE } from '../constants';
+import createChildProcess from '../child';
+import { createProxyMiddleware } from 'http-proxy-middleware';
+import { STATIC_USE, NODE_USE } from '../constants';
+
+import { createHttpTerminator } from 'http-terminator';
 
 export const command = 'dev';
 export const aliases: Array<string> = ['d'];
@@ -35,7 +38,7 @@ export const devOptions = {
 
 export type DevHandler = (argv: Arguments<DevOptions>) => PromiseLike<void>;
 
-const timeout = 100;
+const timeout = 2000;
 
 const mapPort = async (p: number) => {
   const nextPort = await getNextPort(p);
@@ -104,7 +107,34 @@ export const handler: DevHandler = async argv => {
 
     const buildsInfo = await Promise.all(
       builds.map(build => {
-        return createChildServer({ server, build, debug, spawnOpts });
+        return createChildProcess({ server, build, spawnOpts });
+      })
+    );
+
+    const router = buildsInfo.reduce((acc, build) => {
+      const { port, dest = '', subdomain = '', use = NODE_USE } = build;
+      let reroute = `localhost:${rootPort}${dest}`;
+
+      if (use === NODE_USE) {
+        if (subdomain) {
+          reroute = `${subdomain}.localhost:${rootPort}${dest}`;
+        }
+        return { ...acc, [reroute]: `http://localhost:${port}` };
+      }
+
+      return { ...acc };
+    }, {}) as any;
+
+    await server.use(
+      createProxyMiddleware({
+        ws: true, // proxy websockets for local development
+        logLevel: debug ? 'debug' : 'silent',
+        router,
+        xfwd: true,
+        changeOrigin: true,
+        onClose: async (res, socket, head) => {
+          clp.write('closing');
+        }
       })
     );
 
@@ -129,18 +159,26 @@ export const handler: DevHandler = async argv => {
       );
     }
     process.stderr.write(msg);
-    const instance = await server.listen(rootPort);
+    const instance = server.listen(rootPort);
 
-    const shutdown = (signal: any) => {
-      console.log(logInfo(`\n\nClosing Vostok...\n\n`));
-      setTimeout(() => {
-        instance.close();
-        process.exit(1);
-      }, timeout).unref();
+    const httpTerminator = createHttpTerminator({
+      gracefulTerminationTimeout: timeout,
+      server: instance
+    });
+
+    const shutdown = () => {
+      return httpTerminator.terminate();
     };
 
-    process.once('SIGINT', shutdown);
-    process.once('SIGTERM', shutdown);
+    let logged = false;
+    process.on('SIGINT', () => {
+      shutdown().then(() => {
+        if (!logged) {
+          console.log(logInfo(`\n\nClosing Vostok ...\n\n`));
+          logged = true;
+        }
+      });
+    });
   } catch (e) {
     throw e;
   }
