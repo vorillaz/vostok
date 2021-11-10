@@ -6,7 +6,7 @@
     "name": "@vorillaz"
   },
   "dependencies": {
-    "fastify": "^2.14.1"
+    "fastify": "^3.23.1"
   },
   "scripts": {
     "dev": "node index.js"

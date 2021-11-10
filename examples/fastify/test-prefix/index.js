@@ -5,9 +5,10 @@ const fastify = require('fastify')({
 const port = process.env.PORT || 3004;
 
 // Declare a route
-fastify.get('/', function (request, reply) {
+fastify.get('/test-prefix', function (request, reply) {
   reply.send({
-    hello: 'with-a-prefix'
+    hello: 'with-a-prefix',
+    port: port
   });
 });
 

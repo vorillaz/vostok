@@ -1,14 +1,11 @@
 {
-  "name": "simple-fastify-microservices",
+  "name": "simple-express-microservices",
   "version": "1.0.0",
   "private": true,
   "description": "A simple microservices example",
-  "main": "index.js",
   "workspaces": [
-    "api",
-    "auth",
-    "home",
-    "test-prefix"
+    "app",
+    "api"
   ],
   "scripts": {
     "dev": "vostok dev"
@@ -19,6 +16,6 @@
     "vostok": "../../."
   },
   "dependencies": {
-    "fastify": "^3.23.1"
+    "express": "^4.17.1"
   }
 }

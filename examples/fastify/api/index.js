@@ -1,5 +1,6 @@
 const fastify = require('fastify')({
-  logger: true
+  logger: true,
+  trustProxy: true
 });
 
 const port = process.env.PORT || 3001;
@@ -18,12 +19,17 @@ fastify.get('/api', function (request, reply) {
   });
 });
 
+fastify.get('/api/subs', function (request, reply) {
+  console.log(request.raw.url);
+  reply.send('f');
+});
+
 fastify.get('/api/redirect', function (request, reply) {
   reply.redirect('https://vorillaz.com');
 });
 
 // Run the server!
-fastify.listen(port, function (err, address) {
+fastify.listen(port, '0.0.0.0', function (err, address) {
   if (err) {
     fastify.log.error(err);
     process.exit(1);

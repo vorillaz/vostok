@@ -4,7 +4,8 @@
   "private": true,
   "workspaces": [
     "docs",
-    "home"
+    "home",
+    "subdomain"
   ],
   "description": "Using multiple Next.js",
   "scripts": {
@@ -14,8 +15,5 @@
   "license": "MIT",
   "devDependencies": {
     "vostok": "../../."
-  },
-  "dependencies": {
-    "fastify": "^2.14.1"
   }
 }

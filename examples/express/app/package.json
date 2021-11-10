@@ -1,5 +1,5 @@
 {
-  "name": "simple-fastify-microservices-auth",
+  "name": "simple-express-microservices-app",
   "version": "1.0.0",
   "private": true,
   "main": "index.js",
@@ -9,6 +9,6 @@
   "author": "@vorillaz",
   "license": "MIT",
   "dependencies": {
-    "fastify": "^3.23.1"
+    "express": "^4.17.1"
   }
 }

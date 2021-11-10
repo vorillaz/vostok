@@ -12,6 +12,11 @@ module.exports = () => {
         pkg: 'docs',
         dest: '/documentation',
         port: 3002
+      },
+      {
+        pkg: 'subdomain',
+        subdomain: 'vostok',
+        port: 3003
       }
     ]
   };

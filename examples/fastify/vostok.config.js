@@ -10,6 +10,7 @@ module.exports = {
     {
       pkg: 'api',
       dest: '/api',
+      subdomain: 'staging',
       port: 8001,
       env: {
         LOCAL_KEY: 'this is coming from vostok.config.js'

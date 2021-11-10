@@ -5,14 +5,12 @@ module.exports = {
     {
       pkg: 'app',
       use: '@vostok/static',
-      dest: '/app',
-      src: '/dist'
+      dest: '/app'
     },
     {
       pkg: 'lib',
       use: '@vostok/static',
-      dest: '/lib',
-      src: '/dist'
+      dest: '/lib'
     }
   ]
 };
