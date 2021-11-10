@@ -113,40 +113,34 @@ module.exports = {
 };
 ```
 
-### builds.router
+### builds.dest
 
-Used in order to manipulate the routing options, it could be an object or a function and make vostok more flexible.
+The destination path to resolve proxy the request
 
 ```js
 module.exports = {
   builds: [
     {
-      pkg: 'home',
-      dest: '/',
-      router: {
-        'localhost:3000': 'http://localhost:8001', // host only
-        'staging.localhost:3000': 'http://localhost:8002', // host only
-        'localhost:3000/api': 'http://localhost:8003', // host + path
-        '/rest': 'http://localhost:8004' // path only
-      }
-    },
-    {
+      port: 5001
       pkg: 'api',
-      dest: '/api',
-      router: function (req) {
-        return 'http://localhost:8004';
-      }
-    },
+      dest: '/api' // proxying http://localhost:3000/api to http://localhost:5001
+    }
+  ]
+};
+```
+
+### builds.subdomain
+
+The destination subdomain to resolve proxy the request
+
+```js
+module.exports = {
+  builds: [
     {
+      port: 5002
       pkg: 'api',
-      dest: '/api',
-      router: function (req) {
-        return {
-          protocol: 'https:', // The : is required
-          host: 'localhost',
-          port: 8004
-        };
-      }
+      subdomain: 'bar',
+      dest: '/foo' // proxying http://bar.localhost:3000/foo to http://localhost:5002
     }
   ]
 };
