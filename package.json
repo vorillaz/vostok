@@ -40,7 +40,7 @@
     "fs-extra": "10.0.0",
     "http-proxy-middleware": "2.0.1",
     "http-terminator": "^3.0.3",
-    "minimist": "1.2.5",
+    "minimist": "1.2.6",
     "semver": "7.3.4",
     "yargs": "17.2.1"
   },
